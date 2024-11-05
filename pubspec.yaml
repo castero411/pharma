@@ -1,0 +1,32 @@
+name: medicine_manager
+description: "A new Flutter project."
+
+
+publish_to: 'none' #
+
+
+environment:
+  sdk: ^3.5.4
+  flutter: ^3.24.4
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.8
+  shared_preferences: ^2.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+flutter:
+
+
+  uses-material-design: true

@@ -12,7 +12,7 @@ class MedcalApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: light_theme,
+      theme: lightTheme,
       initialRoute: 'home',
       routes: {
         'home': (context) => MainPage(),

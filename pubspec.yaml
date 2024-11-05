@@ -22,6 +22,20 @@ dependencies:
   flutter_native_splash: ^2.4.2
   flutter_riverpod: ^2.6.1
 
+flutter_native_splash:
+  android: true
+  ios: true
+  web: false
+  color: "#154FE3"
+  color_dark: "#154FE3"
+  image: "assets/logo.jpg"
+
+  android_12:
+    color: "#154FE3"
+    color_dark: "#154FE3"
+    image: "assets/logo.jpg"
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -32,3 +46,5 @@ flutter:
 
 
   uses-material-design: true
+  assets:
+    - assets/

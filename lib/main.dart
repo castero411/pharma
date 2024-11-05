@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medicine_manager/UI/Pages/main_page.dart';
+import 'package:medicine_manager/UI/Pages/login_page/login_page.dart';
 import 'UI/Theme/theme.dart';
 
 void main() {
@@ -13,10 +13,7 @@ class MedcalApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: lightTheme,
-      initialRoute: 'home',
-      routes: {
-        'home': (context) => MainPage(),
-      },
+      home: LoginPage(),
     );
   }
 }

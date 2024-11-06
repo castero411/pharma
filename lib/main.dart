@@ -9,31 +9,14 @@ void main() {
   runApp(const MedicalApp());
 }
 
-class MedicalApp extends StatefulWidget {
+class MedicalApp extends StatelessWidget {
   const MedicalApp({super.key});
 
   @override
-  State<MedicalApp> createState() => _MedicalAppState();
-}
-
-class _MedicalAppState extends State<MedicalApp> {
-  @override
-  void initState() {
-    super.initState();
-    initialization();
-  }
-
-  void initialization() async {
-    //pausing for 3 seconds
-    print("pausing");
-    await Future.delayed(const Duration(seconds: 3));
-    //unpausing and entering the main application
-    print("continuing");
-    FlutterNativeSplash.remove();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    //unpausing and entering the main application
+    FlutterNativeSplash.remove();
+
     return MaterialApp(
       theme: lightTheme,
       home: MainPage(),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medicine_manager/UI/Pages/login_page/login_page.dart';
 import 'package:medicine_manager/UI/Pages/main_page/main_page.dart';
+import 'package:medicine_manager/UI/Pages/signup%20page/signup_page.dart';
 import 'UI/Theme/theme.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
@@ -35,7 +36,7 @@ class _MedicalAppState extends State<MedicalApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: lightTheme,
-      home: LoginPage(),
+      home: SignupPage(),
     );
   }
 }

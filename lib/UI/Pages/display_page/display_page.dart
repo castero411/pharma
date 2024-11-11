@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
-import 'package:medicine_manager/UI/widgets/display_switch_tile.dart';
+import 'package:medicine_manager/UI/widgets/switch_tile.dart';
 import '../../Provider/provider.dart';
 import '../../Theme/colors.dart';
 
@@ -37,7 +37,7 @@ class DisplayPage extends ConsumerWidget {
       body: SafeArea(
         child: Column(
           children: [
-            DisplaySwitchTile(
+            SwitchTile(
               icon: Ionicons.pencil_outline,
               title: "Light Mode",
               isSwitched: isSwitched,

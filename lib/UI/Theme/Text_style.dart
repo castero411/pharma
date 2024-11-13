@@ -7,3 +7,9 @@ var bigTextStyle = TextStyle(
   fontSize: 24,
   fontWeight: FontWeight.w700,
 );
+
+var mediumTextStyle = TextStyle(
+  color: xLightTextColor,
+  fontSize: 24,
+  fontWeight: FontWeight.w500,
+);

@@ -24,6 +24,7 @@ dependencies:
   gap: ^3.0.1
   font_awesome_flutter: ^10.8.0
   ionicons: ^0.2.2
+  image_picker: ^1.1.2
 
 flutter_native_splash:
   android: true

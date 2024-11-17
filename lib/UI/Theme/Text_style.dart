@@ -13,3 +13,20 @@ var mediumTextStyle = TextStyle(
   fontSize: 24,
   fontWeight: FontWeight.w500,
 );
+
+var labelTextStyle = TextStyle(
+  color: xLightTextColor,
+  fontSize: 20,
+  fontWeight: FontWeight.w600,
+);
+
+var textFieldTitle = TextStyle(
+  color: xLightTextColor,
+  fontSize: 16,
+  fontWeight: FontWeight.w600,
+);
+
+var textFieldEntry = TextStyle(
+  color: xLightTextColor,
+  fontSize: 16,
+);

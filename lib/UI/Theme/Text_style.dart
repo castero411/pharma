@@ -2,6 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
 
+var veryBigTextStyle = TextStyle(
+  color: xLightTextColor,
+  fontSize: 32,
+  fontWeight: FontWeight.w700,
+);
+
 var bigTextStyle = TextStyle(
   color: xLightTextColor,
   fontSize: 24,

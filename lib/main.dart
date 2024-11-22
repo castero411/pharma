@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medicine_manager/UI/Pages/display_page/display_page.dart';
+import 'package:medicine_manager/UI/Pages/login_page/login_page.dart';
 import 'package:medicine_manager/UI/Pages/main_page/main_page.dart';
 import 'package:medicine_manager/UI/Pages/notifications_page/notifications_page.dart';
 import 'package:medicine_manager/UI/Pages/settings_page/settings_page.dart';
@@ -40,12 +41,13 @@ class _MedicalAppState extends State<MedicalApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: lightTheme,
-      home: SettingsPage(),
+      home: MainPage(),
       routes: {
         'main_page': (context) => MainPage(),
         'settings': (context) => SettingsPage(),
         'notifications': (context) => NotificationsPage(),
         'display': (context) => DisplayPage(),
+        'login': (context) => LoginPage(),
       },
     );
   }

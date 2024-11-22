@@ -32,43 +32,31 @@ class SettingsPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 50.0, bottom: 20.0),
-              child: SettingsTile(
-                icon: Ionicons.person_circle_outline,
-                title: "Account",
-                onTap: () {
-                  //TODO: create an account page
-                },
-              ),
+            SettingsTile(
+              icon: Ionicons.person_circle_outline,
+              title: "Account",
+              onTap: () {
+                //TODO: create an account page
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: SettingsTile(
-                icon: Ionicons.notifications_outline,
-                title: "Notifications",
-                onTap: () {
-                  Navigator.pushNamed(context, 'notifications');
-                },
-              ),
+            SettingsTile(
+              icon: Ionicons.notifications_outline,
+              title: "Notifications",
+              onTap: () {
+                Navigator.pushNamed(context, 'notifications');
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: SettingsTile(
-                icon: Ionicons.pencil_sharp,
-                title: "Display",
-                onTap: () {
-                  Navigator.pushNamed(context, 'display');
-                },
-              ),
+            SettingsTile(
+              icon: Ionicons.pencil_sharp,
+              title: "Display",
+              onTap: () {
+                Navigator.pushNamed(context, 'display');
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: SettingsTile(
-                icon: Ionicons.log_out_outline,
-                title: "Log out",
-                onTap: () {},
-              ),
+            SettingsTile(
+              icon: Ionicons.log_out_outline,
+              title: "Log out",
+              onTap: () {},
             )
           ],
         ),

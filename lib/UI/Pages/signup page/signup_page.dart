@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:gap/gap.dart';
-import 'package:medicine_manager/UI/Pages/common/custom_form_field.dart';
-import 'package:medicine_manager/UI/Pages/common/wide_button.dart';
-import 'package:medicine_manager/UI/Pages/login_page/widgets/login_with_button.dart';
+
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
+
+import '../common/widgets/custom_form_field.dart';
+import '../common/widgets/wide_button.dart';
 
 class SignupPage extends StatelessWidget {
   SignupPage({super.key});

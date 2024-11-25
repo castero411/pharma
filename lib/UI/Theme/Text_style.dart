@@ -1,6 +1,11 @@
-// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
+
+var veryBigTextStyle = TextStyle(
+  color: xLightTextColor,
+  fontSize: 32,
+  fontWeight: FontWeight.w700,
+);
 
 var bigTextStyle = TextStyle(
   color: xLightTextColor,
@@ -19,3 +24,20 @@ var smallTextStyle = TextStyle(
 
 var whiteTextStyle = TextStyle(
     color: xScaffoldColorLight, fontSize: 20, fontWeight: FontWeight.w600);
+
+var labelTextStyle = TextStyle(
+  color: xLightTextColor,
+  fontSize: 20,
+  fontWeight: FontWeight.w600,
+);
+
+var textFieldTitle = TextStyle(
+  color: xLightTextColor,
+  fontSize: 16,
+  fontWeight: FontWeight.w600,
+);
+
+var textFieldEntry = TextStyle(
+  color: xLightTextColor,
+  fontSize: 16,
+);

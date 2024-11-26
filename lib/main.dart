@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medicine_manager/UI/Pages/add_medicine/add_medicine.dart';
 import 'package:medicine_manager/UI/Pages/display_page/display_page.dart';
+import 'package:medicine_manager/UI/Pages/login_page/login_page.dart';
 import 'package:medicine_manager/UI/Pages/main_page/main_page.dart';
 import 'package:medicine_manager/UI/Pages/notifications_page/notifications_page.dart';
 import 'package:medicine_manager/UI/Pages/settings_page/settings_page.dart';
-import 'UI/Pages/login_page/login_page.dart';
 import 'UI/Pages/signup page/signup_page.dart';
 import 'UI/Theme/theme.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -43,7 +43,7 @@ class _MedicalAppState extends State<MedicalApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: lightTheme,
-      home: AddMedicine(),
+      home: MainPage(),
       routes: {
         'login_page': (context) => LoginPage(),
         'signup_page': (context) => SignupPage(),
@@ -51,6 +51,7 @@ class _MedicalAppState extends State<MedicalApp> {
         'settings': (context) => SettingsPage(),
         'notifications': (context) => NotificationsPage(),
         'display': (context) => DisplayPage(),
+        'login': (context) => LoginPage(),
         'add_medicine': (context) => AddMedicine(),
       },
     );

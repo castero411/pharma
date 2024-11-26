@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:gap/gap.dart';
-
+import 'package:medicine_manager/UI/Pages/common/widgets/custom_form_field.dart';
+import 'package:medicine_manager/UI/Pages/common/widgets/wide_button.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
-
-import '../common/widgets/custom_form_field.dart';
-import '../common/widgets/wide_button.dart';
+import 'package:medicine_manager/functions/validation/email_form_validation.dart';
 
 class SignupPage extends StatelessWidget {
   SignupPage({super.key});
@@ -16,15 +14,6 @@ class SignupPage extends StatelessWidget {
   String? _password;
 
   bool obscure = true;
-
-  String? usernameValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return "please enter your username";
-    } else if (value.contains('@')) {
-      return null;
-    }
-    return 'please enter a valid email';
-  }
 
   void onUsernameSave(String? value) {
     _username = value;
@@ -70,7 +59,7 @@ class SignupPage extends StatelessWidget {
                       // username text form field
                       hint: 'Name',
                       obscure: false,
-                      validator: usernameValidator,
+                      validator: emailValidator,
                       onSave: onUsernameSave,
                     ),
                     Gap(gapSize - 5),
@@ -78,6 +67,7 @@ class SignupPage extends StatelessWidget {
                       // password text form field
                       hint: 'Email',
                       obscure: obscure,
+                      validator: emailValidator,
                       onSave: onEmailSave,
                     ),
                     Gap(gapSize),
@@ -85,6 +75,7 @@ class SignupPage extends StatelessWidget {
                       // password text form field
                       hint: 'Password',
                       obscure: obscure,
+                      validator: passwordValidator,
                       onSave: onPasswordSave,
                     ),
                     Gap(gapSize),

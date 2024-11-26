@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 
+import 'package:medicine_manager/UI/Pages/common/widgets/custom_form_field.dart';
+import 'package:medicine_manager/UI/Pages/common/widgets/wide_button.dart';
+
 import 'package:medicine_manager/UI/Pages/login_page/widgets/login_with_button.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
-
-import '../common/widgets/custom_form_field.dart';
-import '../common/widgets/wide_button.dart';
+import 'package:medicine_manager/functions/validation/email_form_validation.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -17,15 +18,6 @@ class LoginPage extends StatelessWidget {
   String? _password;
 
   bool obscure = true;
-
-  String? usernameValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return "please enter your username";
-    } else if (value.contains('@')) {
-      return null;
-    }
-    return 'please enter a valid email';
-  }
 
   void onUsernameSave(String? value) {
     _username = value;
@@ -82,12 +74,14 @@ class LoginPage extends StatelessWidget {
                     // password text form field
                     hint: 'Password',
                     obscure: obscure,
+                    validator: passwordValidator,
                     onSave: onPasswordSave,
                   ),
                   Gap(gapSize),
                   WideButton(
                     title: 'Log in',
                     onTap: () {
+                      // excute the logi process
                       print("logged in");
                     },
                   ),

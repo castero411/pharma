@@ -3,6 +3,7 @@ import 'package:day_night_time_picker/day_night_time_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
+import 'package:medicine_manager/UI/vague_widgets/decorated_box.dart';
 import '../../../Provider/provider.dart';
 
 class TimePicker extends ConsumerWidget {
@@ -18,21 +19,11 @@ class TimePicker extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedTime = ref.watch(timeProvider);
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        // Text(
-        //   "Selected Time: ${selectedTime.format(context)}",
-        //   style: TextStyle(fontSize: 18),
-        // ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              elevation: 0,
-              backgroundColor: xLightButtonColor,
-              fixedSize: Size(345, 61),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(9))),
-          onPressed: () {
+    return SizedBox(
+      width: double.infinity,
+      child: InputBoxDecor(
+        child: InkWell(
+          onTap: () {
             Navigator.of(context).push(
               showPicker(
                 context: context,
@@ -44,12 +35,14 @@ class TimePicker extends ConsumerWidget {
               ),
             );
           },
-          child: Text(
-            selectedTime.format(context),
-            style: veryBigTextStyle,
+          child: Center(
+            child: Text(
+              selectedTime.format(context),
+              style: veryBigTextStyle,
+            ),
           ),
         ),
-      ],
+      ),
     );
   }
 }

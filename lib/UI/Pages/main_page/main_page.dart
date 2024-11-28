@@ -1,8 +1,6 @@
-import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:medicine_manager/UI/Pages/main_page/date_picker/date_picker.dart';
 import 'package:medicine_manager/UI/Pages/main_page/medicine_list/medicine_list.dart';
-import 'package:medicine_manager/UI/Pages/main_page/medicine_tile_view/medicine_tile.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
 import 'package:medicine_manager/models/med_time.dart';
 

@@ -10,6 +10,7 @@ var lightTheme = ThemeData.light().copyWith(
     titleTextStyle: bigTextStyle,
   ),
   iconTheme: IconThemeData(color: xLightTextColor),
+  
 );
 
 var darkTheme = ThemeData.dark().copyWith();

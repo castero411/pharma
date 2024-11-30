@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:medicine_manager/UI/Pages/add_medicine/bottom_button/bottom_button.dart';
 import 'package:medicine_manager/UI/Pages/add_medicine/name_text_field/name_text_field.dart';
+import 'package:medicine_manager/UI/Pages/add_medicine/week_list/week_list.dart';
 import 'package:medicine_manager/UI/Pages/common/widgets/time_picker.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
-import 'package:medicine_manager/models/drug_type.dart';
 
 enum DrugType {
   pills,
@@ -21,33 +22,37 @@ class AddMedicine extends StatelessWidget {
   String? name;
   String? description;
   DateTime? startingDate;
-  DateTime? endingDate;
   DrugType? currentType = DrugType.pills;
+  List<String> daysOfTheWeek = [];
 
   TextEditingController nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Add Medicine",
-            style: mediumTextStyle,
-          ),
-          centerTitle: true,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_rounded,
-              color: xLightTextColor,
-              size: 30,
-            ),
+      appBar: AppBar(
+        title: Text(
+          "Add Medicine",
+          style: mediumTextStyle,
+        ),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_rounded,
+            color: xLightTextColor,
+            size: 30,
           ),
         ),
-        body: SafeArea(
-            child: Form(
+      ),
+      bottomNavigationBar: BottomButton(
+        onTap: () {},
+        height: 64,
+      ),
+      body: SafeArea(
+        child: Form(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             child: SingleChildScrollView(
@@ -127,6 +132,17 @@ class AddMedicine extends StatelessWidget {
                   Center(child: TimePicker()),
                   Gap(gapSize),
                   Text(
+                    "Days",
+                    style: labelTextStyle,
+                  ),
+                  SizedBox(
+                    height: MediaQuery.sizeOf(context).height / 14,
+                    child: WeekList(
+                      currentWeek: daysOfTheWeek,
+                    ),
+                  ),
+                  Gap(gapSize),
+                  Text(
                     "Description",
                     style: labelTextStyle,
                   ),
@@ -150,11 +166,13 @@ class AddMedicine extends StatelessWidget {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
           ),
-        )));
+        ),
+      ),
+    );
   }
 }

@@ -1,4 +1,4 @@
-enum Drugs {
+enum DrugType {
   pills,
   injection,
   elixir,
@@ -6,10 +6,3 @@ enum Drugs {
   nepolyzer,
 }
 
-class DrugType {
-  final String name;
-
-  const DrugType({
-    required this.name,
-  });
-}

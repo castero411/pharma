@@ -14,7 +14,7 @@ class MedicineList extends StatelessWidget {
         return MedicineTile(
           name: currentMedicines[item].name,
           time: currentMedicines[item].time,
-          taken: currentMedicines[item].taken,
+          taken: true,
         );
       },
     );

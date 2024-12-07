@@ -35,6 +35,7 @@ class _MedicalAppState extends State<MedicalApp> {
     _initializeApp();
   }
 
+  @override
   Future<void> _initializeApp() async {
     // Pausing for splash screen
     await Future.delayed(const Duration(seconds: 3));

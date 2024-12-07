@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medicine_manager/UI/Pages/main_page/date_picker/date_picker.dart';
 import 'package:medicine_manager/UI/Pages/main_page/medicine_list/medicine_list.dart';
+import 'package:medicine_manager/UI/Provider/current_medicine_provider.dart';
+import 'package:medicine_manager/UI/Provider/provider.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
-import 'package:medicine_manager/models/med_time.dart';
+import 'package:medicine_manager/models/medicine.dart';
 
-class MainPage extends StatelessWidget {
-  MainPage({super.key});
-
-  late DateTime currentTime;
-  List<MedicineTime> currentMedicines = [
-    MedicineTime(name: 'aloxanorm', time: '10:30'),
-  ];
+class MainPage extends ConsumerWidget {
+  const MainPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    DateTime currnetDate = ref.watch(dateProvider);
+    List<Medicine> medicineList = ref.watch(currentMedicine);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("November 2024"),
@@ -44,7 +45,7 @@ class MainPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               child: MedicineList(
-                currentMedicines: currentMedicines,
+                currentMedicines: medicineList,
               ),
             ),
           )

@@ -3,20 +3,30 @@ import 'package:medicine_manager/UI/Theme/Text_style.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
 
 class NameTextField extends StatelessWidget {
-  const NameTextField({super.key, required this.controller});
+  const NameTextField({
+    super.key,
+    required this.controller,
+    required this.text,
+    required this.validator,
+    required this.keyboardType,
+  });
 
   final TextEditingController controller;
-
+  final String text;
+  final FormFieldValidator validator;
+  final TextInputType keyboardType;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 261,
+      width: double.infinity,
       child: TextFormField(
+        validator: validator,
+        keyboardType: keyboardType,
         controller: controller,
         autocorrect: false,
         cursorColor: xLightTextColor,
         decoration: InputDecoration(
-          labelText: "Name",
+          labelText: text,
           labelStyle: labelTextStyle,
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(

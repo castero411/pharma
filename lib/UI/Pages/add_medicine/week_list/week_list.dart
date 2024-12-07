@@ -12,26 +12,36 @@ List<String> days = [
   'Fri',
 ];
 
-class WeekList extends StatelessWidget {
+class WeekList extends StatefulWidget {
   const WeekList({super.key, required this.currentWeek});
   final List<String> currentWeek;
 
+  @override
+  State<WeekList> createState() => _WeekListState();
+}
+
+class _WeekListState extends State<WeekList> {
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         for (final dayName in days)
           DayBox(
-              name: dayName,
-              isOn: currentWeek.contains(dayName),
-              onTap: () {
-                if (currentWeek.contains(dayName)) {
-                  currentWeek.remove(dayName);
-                } else {
-                  currentWeek.add(dayName);
-                  print(currentWeek);
-                }
-              })
+            name: dayName,
+            isOn: widget.currentWeek.contains(dayName),
+            onTap: () {
+              setState(
+                () {
+                  if (widget.currentWeek.contains(dayName)) {
+                    widget.currentWeek.remove(dayName);
+                  } else {
+                    widget.currentWeek.add(dayName);
+                    print(widget.currentWeek);
+                  }
+                },
+              );
+            },
+          ),
       ],
     );
   }
@@ -49,7 +59,7 @@ class DayBox extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(2),
         child: Material(
-          color: isOn ? xScaffoldColorLight : xMainColor,
+          color: isOn ? xMainColor : xContainerColor,
           borderRadius: BorderRadius.circular(10),
           borderOnForeground: true,
           child: InkWell(
@@ -59,7 +69,7 @@ class DayBox extends StatelessWidget {
               child: Text(
                 name,
                 style: smallTextStyle.copyWith(
-                    color: isOn ? xScaffoldColorLight : xScaffoldColorLight),
+                    color: isOn ? xScaffoldColorLight : xLightTextColor),
               ),
             ),
           ),

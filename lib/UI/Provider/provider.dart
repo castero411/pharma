@@ -12,3 +12,4 @@ final selectedPeriodsProvider = StateProvider<List<String>>((ref) => []);
 
 // this is the provider for the time picker
 final timeProvider = StateProvider<TimeOfDay>((ref) => TimeOfDay.now());
+final dateProvider = StateProvider<DateTime>((ref) => DateTime.now());

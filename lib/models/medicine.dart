@@ -1,17 +1,43 @@
 class Medicine {
-  final int id;
+  final String id; // Unique Firestore document ID
   final String name;
-  final DateTime startingDate;
   final String description;
-  final int dose;
-  final List<String> daysOfTheWeek;
+  final String type;
+  final String dose;
+  final List<String> daysOfTheWeek; // Days medicine should be taken
+  final DateTime time;
 
-  const Medicine({
+  Medicine({
     required this.id,
-    required this.description,
+    required this.type,
     required this.name,
-    required this.startingDate,
+    required this.description,
     required this.dose,
     required this.daysOfTheWeek,
+    required this.time,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'type': type,
+      'name': name,
+      'description': description,
+      'dose': dose,
+      'daysOfTheWeek': daysOfTheWeek,
+      'time': time.toIso8601String(),
+    };
+  }
+
+  factory Medicine.fromMap(Map<String, dynamic> map) {
+    return Medicine(
+      id: map['id'] ?? '',
+      type: map['type'] ?? '',
+      name: map['name'] ?? '',
+      description: map['description'] ?? '',
+      dose: map['dose'] ?? '',
+      daysOfTheWeek: List<String>.from(map['daysOfTheWeek'] ?? []),
+      time: DateTime.parse(map['time']),
+    );
+  }
 }

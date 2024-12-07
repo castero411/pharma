@@ -1,20 +1,23 @@
-// main.dart
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+
 import 'package:medicine_manager/UI/Pages/add_medicine/add_medicine.dart';
 import 'package:medicine_manager/UI/Pages/display_page/display_page.dart';
 import 'package:medicine_manager/UI/Pages/login_page/login_page.dart';
 import 'package:medicine_manager/UI/Pages/main_page/main_page.dart';
 import 'package:medicine_manager/UI/Pages/notifications_page/notifications_page.dart';
 import 'package:medicine_manager/UI/Pages/settings_page/settings_page.dart';
-import 'UI/Pages/signup page/signup_page.dart';
-import 'UI/Theme/theme.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:medicine_manager/UI/Pages/signup%20page/signup_page.dart';
 
-void main() {
+import 'package:medicine_manager/UI/Provider/user_provider.dart';
+import 'package:medicine_manager/UI/Theme/theme.dart';
+
+void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  await Firebase.initializeApp();
   runApp(ProviderScope(child: const MedicalApp()));
 }
 
@@ -29,30 +32,36 @@ class _MedicalAppState extends State<MedicalApp> {
   @override
   void initState() {
     super.initState();
-    initialization();
+    _initializeApp();
   }
 
-  void initialization() async {
-    // Pausing for 3 seconds
+  Future<void> _initializeApp() async {
+    // Pausing for splash screen
     await Future.delayed(const Duration(seconds: 3));
-    // Unpausing and entering the main application
     FlutterNativeSplash.remove();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: lightTheme,
-      home: MainPage(),
-      routes: {
-        'login_page': (context) => LoginPage(),
-        'signup_page': (context) => SignupPage(),
-        'main_page': (context) => MainPage(),
-        'settings': (context) => SettingsPage(),
-        'notifications': (context) => NotificationsPage(),
-        'display': (context) => DisplayPage(),
-        'login': (context) => LoginPage(),
-        'add_medicine': (context) => AddMedicine(),
+    return Consumer(
+      builder: (context, ref, _) {
+        // We load the user from SharedPreferences
+        final user = ref.watch(userProvider);
+
+        // If no user is found, navigate to the login page, otherwise to the main page
+        return MaterialApp(
+          theme: lightTheme,
+          home: user == null ? LoginPage() : MainPage(),
+          routes: {
+            'login_page': (context) => LoginPage(),
+            'signup_page': (context) => SignupPage(),
+            'main_page': (context) => MainPage(),
+            'settings': (context) => SettingsPage(),
+            'notifications': (context) => NotificationsPage(),
+            'display': (context) => DisplayPage(),
+            'add_medicine': (context) => AddMedicine(),
+          },
+        );
       },
     );
   }

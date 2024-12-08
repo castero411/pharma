@@ -1,43 +1,45 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Medicine {
-  final String id; // Unique Firestore document ID
   final String name;
   final String description;
   final String type;
   final String dose;
-  final List<String> daysOfTheWeek; // Days medicine should be taken
-  final DateTime time;
+  final DateTime startingDate;
+  final Map<String, bool> takenDate;
 
   Medicine({
-    required this.id,
     required this.type,
     required this.name,
     required this.description,
     required this.dose,
-    required this.daysOfTheWeek,
-    required this.time,
+    required this.startingDate,
+    required this.takenDate,
   });
 
+  // Convert Medicine object to a Firestore-compatible map
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
-      'type': type,
       'name': name,
       'description': description,
+      'type': type,
       'dose': dose,
-      'daysOfTheWeek': daysOfTheWeek,
-      'time': time.toIso8601String(),
+      'startingDate': startingDate,
+      'takenDate': takenDate,
     };
   }
 
-  factory Medicine.fromMap(Map<String, dynamic> map) {
+  // Convert Firestore document data to a Medicine object
+  factory Medicine.fromMap(Map<String, dynamic> data) {
     return Medicine(
-      id: map['id'] ?? '',
-      type: map['type'] ?? '',
-      name: map['name'] ?? '',
-      description: map['description'] ?? '',
-      dose: map['dose'] ?? '',
-      daysOfTheWeek: List<String>.from(map['daysOfTheWeek'] ?? []),
-      time: DateTime.parse(map['time']),
+      type: data['type'] ?? '',
+      name: data['name'] ?? '',
+      description: data['description'] ?? '',
+      dose: data['dose'] ?? '',
+      startingDate:
+          (data['startingDate'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      takenDate: Map<String, bool>.from(data['takenDate'] ?? {}),
     );
   }
 }

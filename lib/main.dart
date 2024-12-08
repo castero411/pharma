@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,13 +12,13 @@ import 'package:medicine_manager/UI/Pages/notifications_page/notifications_page.
 import 'package:medicine_manager/UI/Pages/settings_page/settings_page.dart';
 import 'package:medicine_manager/UI/Pages/signup%20page/signup_page.dart';
 
-import 'package:medicine_manager/UI/Provider/user_provider.dart';
 import 'package:medicine_manager/UI/Theme/theme.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await Firebase.initializeApp();
+
   runApp(ProviderScope(child: const MedicalApp()));
 }
 
@@ -35,9 +36,9 @@ class _MedicalAppState extends State<MedicalApp> {
     _initializeApp();
   }
 
-  @override
   Future<void> _initializeApp() async {
     // Pausing for splash screen
+
     await Future.delayed(const Duration(seconds: 3));
     FlutterNativeSplash.remove();
   }
@@ -47,7 +48,9 @@ class _MedicalAppState extends State<MedicalApp> {
     return Consumer(
       builder: (context, ref, _) {
         // We load the user from SharedPreferences
-        final user = ref.watch(userProvider);
+        final FirebaseAuth auth = FirebaseAuth.instance;
+
+        User? user = auth.currentUser;
 
         // If no user is found, navigate to the login page, otherwise to the main page
         return MaterialApp(

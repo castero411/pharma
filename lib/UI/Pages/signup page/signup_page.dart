@@ -1,35 +1,67 @@
+import 'dart:typed_data';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:medicine_manager/UI/Pages/common/widgets/custom_form_field.dart';
 import 'package:medicine_manager/UI/Pages/common/widgets/wide_button.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
+import 'package:medicine_manager/firebase/create_user_document.dart';
 import 'package:medicine_manager/functions/validation/email_form_validation.dart';
 
-class SignupPage extends StatelessWidget {
+class SignupPage extends ConsumerWidget {
   SignupPage({super.key});
 
   final _formKey = GlobalKey<FormState>();
-  String? _username;
-  String? _email;
-  String? _password;
 
-  bool obscure = true;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
 
-  void onUsernameSave(String? value) {
-    _username = value;
-  }
+  Future<void> _signUp(WidgetRef ref, BuildContext context) async {
+    if (_formKey.currentState?.validate() ?? false) {
+      // Form is valid, perform the sign-up
+      final username = usernameController.text;
+      final email = emailController.text;
+      final password = passwordController.text!;
 
-  void onEmailSave(String? value) {
-    _email = value;
-  }
+      try {
+        // Sign up with Firebase Authentication
+        final UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
 
-  void onPasswordSave(String? value) {
-    _password = value;
+        // After successful sign-up, save additional details (like username)
+        final user = userCredential.user;
+        if (user != null) {
+          createEmptyUserDocument();
+          // Navigate to the main page after successful registration
+
+          Navigator.pushReplacementNamed(context, 'main_page');
+        }
+      } on FirebaseAuthException catch (e) {
+        String errorMessage = 'Sign-up failed';
+        if (e.code == 'email-already-in-use') {
+          errorMessage =
+              'The email is already in use. Please choose another one.';
+        } else if (e.code == 'weak-password') {
+          errorMessage =
+              'The password is too weak. Please choose a stronger password.';
+        }
+
+        // Display error message
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(errorMessage)));
+      }
+    }
   }
 
   @override
-  Widget build(BuildContext context) {
-    double gapSize = 28; // for eazier customization when adding flexability
+  Widget build(BuildContext context, WidgetRef ref) {
+    double gapSize = 28; // for easier customization when adding flexibility
 
     return Scaffold(
       body: Padding(
@@ -41,50 +73,52 @@ class SignupPage extends StatelessWidget {
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset('assets/logo.jpg'),
-                    Gap(gapSize * 2),
-                    SizedBox(
-                      width: double.infinity,
-                      child: Text(
-                        'Create a new account',
-                        textAlign: TextAlign.left,
-                        style: bigTextStyle,
-                      ),
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset('assets/logo.jpg'),
+                  Gap(gapSize * 2),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      'Create a new account',
+                      textAlign: TextAlign.left,
+                      style: bigTextStyle,
                     ),
-                    Gap(gapSize),
-                    CustomFormField(
-                      // username text form field
-                      hint: 'Name',
-                      obscure: false,
-                      validator: emailValidator,
-                      onSave: onUsernameSave,
-                    ),
-                    Gap(gapSize - 5),
-                    CustomFormField(
-                      // password text form field
-                      hint: 'Email',
-                      obscure: obscure,
-                      validator: emailValidator,
-                      onSave: onEmailSave,
-                    ),
-                    Gap(gapSize),
-                    CustomFormField(
-                      // password text form field
-                      hint: 'Password',
-                      obscure: obscure,
-                      validator: passwordValidator,
-                      onSave: onPasswordSave,
-                    ),
-                    Gap(gapSize),
-                    WideButton(
-                      title: 'Sign up',
-                      onTap: () {},
-                    ),
-                    Gap(gapSize * 2),
-                  ]),
+                  ),
+                  Gap(gapSize),
+                  CustomFormField(
+                    // username text form field
+                    hint: 'Username',
+                    obscure: false,
+                    validator: (value) =>
+                        value!.isEmpty ? 'Please enter a username' : null,
+                    controller: usernameController,
+                  ),
+                  Gap(gapSize - 5),
+                  CustomFormField(
+                    // email text form field
+                    hint: 'Email',
+                    obscure: false,
+                    validator: emailValidator,
+                    controller: emailController,
+                  ),
+                  Gap(gapSize),
+                  CustomFormField(
+                    // password text form field
+                    hint: 'Password',
+                    obscure: true,
+                    validator: passwordValidator,
+                    controller: passwordController,
+                  ),
+                  Gap(gapSize),
+                  WideButton(
+                    title: 'Sign up',
+                    onTap: () => _signUp(ref, context),
+                  ),
+                  Gap(gapSize * 2),
+                ],
+              ),
             ),
           ),
         ),

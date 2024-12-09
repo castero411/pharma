@@ -65,7 +65,7 @@ class MedicineTile extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(10),
                 child: Icon(
-                  taken ? Icons.close_rounded : Icons.check,
+                  taken ? Icons.check : Icons.close_rounded,
                 ),
               ),
             ),

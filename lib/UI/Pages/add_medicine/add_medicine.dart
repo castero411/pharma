@@ -5,12 +5,18 @@ import 'package:medicine_manager/UI/Pages/add_medicine/bottom_button/bottom_butt
 import 'package:medicine_manager/UI/Pages/add_medicine/description_field/description_field.dart';
 import 'package:medicine_manager/UI/Pages/add_medicine/drop_list/drop_list.dart';
 import 'package:medicine_manager/UI/Pages/add_medicine/name_text_field/name_text_field.dart';
-import 'package:medicine_manager/UI/Pages/add_medicine/week_list/week_list.dart';
 import 'package:medicine_manager/UI/Pages/common/widgets/time_picker.dart';
-import 'package:medicine_manager/UI/Provider/add_medicine_providers.dart';
+import 'package:medicine_manager/UI/Provider/medicine_provider.dart';
+import 'package:medicine_manager/UI/Provider/provider.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
+import 'package:medicine_manager/firebase/add_or_update_medicine.dart';
+import 'package:medicine_manager/functions/time/date_to_string.dart';
 import 'package:medicine_manager/functions/validation/medicine_form_validator.dart';
+import 'package:medicine_manager/models/medicine.dart';
+
+// import 'package:medicine_manager/UI/Provider/add_medicine_providers.dart';
+// import 'package:medicine_manager/UI/Pages/add_medicine/week_list/week_list.dart';
 
 class AddMedicine extends ConsumerWidget {
   AddMedicine({super.key});
@@ -25,17 +31,40 @@ class AddMedicine extends ConsumerWidget {
   final TextEditingController _doseController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
-  Future<void> _addMedicine() async {
-    // TODO: add the medicine to the data sets
-    if (_globalKey.currentState!.validate()) {
-      print(descriptionController.text);
+  Medicine createMedicineWithTakenDates({
+    required String name,
+    required String description,
+    required String type,
+    required String dose,
+    required DateTime startingDate,
+  }) {
+    // Parse dose to an integer
+    final int doseCount = int.tryParse(dose) ?? 0; // Use 0 if parsing fails
+    if (doseCount <= 0) {
+      throw ArgumentError("Dose must be a positive integer.");
     }
+
+    // Initialize takenDate map
+    final Map<String, bool> initializedTakenDates = {};
+    for (int i = 0; i < doseCount; i++) {
+      DateTime date = startingDate.add(Duration(days: i));
+      String formattedDate = formatDate(date);
+      initializedTakenDates[formattedDate] = false;
+    }
+
+    // Return the Medicine instance
+    return Medicine(
+      name: name,
+      description: description,
+      type: type,
+      dose: dose,
+      startingDate: startingDate,
+      takenDate: initializedTakenDates,
+    );
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final daysOfTheWeek = ref.watch(selectedDaysProvider);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -45,8 +74,19 @@ class AddMedicine extends ConsumerWidget {
         centerTitle: true,
       ),
       bottomNavigationBar: BottomButton(
-        onTap: () {
-          _addMedicine();
+        onTap: () async {
+          if (_globalKey.currentState!.validate()) {
+            print(descriptionController.text);
+            await addOrUpdateMedicine(createMedicineWithTakenDates(
+              description: descriptionController.text,
+              name: nameController.text,
+              dose: _doseController.text,
+              startingDate: DateTime.now(),
+              type: currentType,
+            ));
+            ref.watch(medicineProvider.notifier).updateList();
+            Navigator.pop(context);
+          }
         },
         height: 64,
       ),
@@ -114,17 +154,17 @@ class AddMedicine extends ConsumerWidget {
                     validator: hasNumber,
                     keyboardType: TextInputType.number,
                   ),
-                  Gap(gapSize),
-                  Text(
-                    "Days",
-                    style: labelTextStyle,
-                  ),
-                  SizedBox(
-                    height: MediaQuery.sizeOf(context).height / 14,
-                    child: WeekList(
-                      currentWeek: daysOfTheWeek,
-                    ),
-                  ),
+                  // Gap(gapSize),
+                  // Text(
+                  //   "Days",
+                  //   style: labelTextStyle,
+                  // ),
+                  // SizedBox(
+                  //   height: MediaQuery.sizeOf(context).height / 14,
+                  //   child: WeekList(
+                  //     currentWeek: daysOfTheWeek,
+                  //   ),
+                  // ),
                   Gap(gapSize),
                   Text(
                     "Description",

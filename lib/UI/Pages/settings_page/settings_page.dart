@@ -3,6 +3,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
 import 'package:medicine_manager/UI/Pages/common/widgets/settings_tile.dart';
+import 'package:medicine_manager/firebase/firebase_logout.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -18,27 +19,28 @@ class SettingsPage extends StatelessWidget {
         ),
         centerTitle: true,
         leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_outlined,
-              color: xLightTextColor,
-              size: 30,
-            )),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_outlined,
+            color: xLightTextColor,
+            size: 30,
+          ),
+        ),
       ),
 
       //this is the body of the scaffold where the content of the page will be added
       body: SafeArea(
         child: Column(
           children: [
-            SettingsTile(
-              icon: Ionicons.person_circle_outline,
-              title: "Account",
-              onTap: () {
-                //TODO: create an account page
-              },
-            ),
+            // SettingsTile(
+            //   icon: Ionicons.person_circle_outline,
+            //   title: "Account",
+            //   onTap: () {
+            //     //TODO: create an account page
+            //   },
+            // ),
             SettingsTile(
               icon: Ionicons.notifications_outline,
               title: "Notifications",
@@ -56,7 +58,9 @@ class SettingsPage extends StatelessWidget {
             SettingsTile(
               icon: Ionicons.log_out_outline,
               title: "Log out",
-              onTap: () {},
+              onTap: () {
+                logout(context);
+              },
             )
           ],
         ),

@@ -1,0 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+Future<void> createEmptyUserDocument() async {
+  try {
+    // Get the current user's UID
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      throw Exception("No user is currently signed in.");
+    }
+    final String uid = user.uid;
+
+    // Reference the user's document in Firestore
+    final docRef = FirebaseFirestore.instance.collection('users').doc(uid);
+
+    // Create an empty document
+    await docRef.set({});
+
+    print("Empty document created for user with UID: $uid");
+  } catch (e) {
+    print("Error creating empty document in Firestore: $e");
+  }
+}

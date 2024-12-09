@@ -23,7 +23,7 @@ String? usernameValidator(String? value) {
 
 String? passwordValidator(String? value) {
   if (value == null || value.isEmpty) {
-    return 'please enter your email';
+    return 'please enter your password';
   }
   return null;
 }

@@ -4,14 +4,14 @@ import 'package:medicine_manager/UI/Theme/colors.dart';
 class CustomFormField extends StatelessWidget {
   final String hint;
   final bool obscure;
-  final Function(String?)? onSave;
   final FormFieldValidator<String?>? validator;
+  final TextEditingController controller;
 
   const CustomFormField(
       {super.key,
       required this.hint,
       required this.obscure,
-      required this.onSave,
+      required this.controller,
       this.validator});
 
   @override
@@ -19,8 +19,8 @@ class CustomFormField extends StatelessWidget {
     return TextFormField(
         key: key,
         obscureText: obscure,
-        onSaved: onSave,
         validator: validator,
+        controller: controller,
         decoration: InputDecoration(
             hintText: hint,
             contentPadding: const EdgeInsets.only(left: 20, top: 35),

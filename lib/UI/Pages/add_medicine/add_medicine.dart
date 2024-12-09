@@ -1,34 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:medicine_manager/UI/Pages/add_medicine/bottom_button/bottom_button.dart';
+import 'package:medicine_manager/UI/Pages/add_medicine/description_field/description_field.dart';
+import 'package:medicine_manager/UI/Pages/add_medicine/drop_list/drop_list.dart';
 import 'package:medicine_manager/UI/Pages/add_medicine/name_text_field/name_text_field.dart';
-import 'package:medicine_manager/UI/Pages/add_medicine/week_list/week_list.dart';
 import 'package:medicine_manager/UI/Pages/common/widgets/time_picker.dart';
+import 'package:medicine_manager/UI/Provider/medicine_provider.dart';
+import 'package:medicine_manager/UI/Provider/provider.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
+import 'package:medicine_manager/firebase/add_or_update_medicine.dart';
+import 'package:medicine_manager/functions/time/date_to_string.dart';
+import 'package:medicine_manager/functions/validation/medicine_form_validator.dart';
+import 'package:medicine_manager/models/medicine.dart';
 
-enum DrugType {
-  pills,
-  injection,
-  elixir,
-  syrup,
-  nepolyzer,
-}
+// import 'package:medicine_manager/UI/Provider/add_medicine_providers.dart';
+// import 'package:medicine_manager/UI/Pages/add_medicine/week_list/week_list.dart';
 
-class AddMedicine extends StatelessWidget {
+class AddMedicine extends ConsumerWidget {
   AddMedicine({super.key});
 
   final double gapSize = 50;
-  String? name;
-  String? description;
-  DateTime? startingDate;
-  DrugType? currentType = DrugType.pills;
-  List<String> daysOfTheWeek = [];
 
-  TextEditingController nameController = TextEditingController();
+  final DateTime startingDate = DateTime.now();
+  final String currentType = 'pills';
+
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController _doseController = TextEditingController();
+  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+
+  Medicine createMedicineWithTakenDates({
+    required String name,
+    required String description,
+    required String type,
+    required String dose,
+    required DateTime startingDate,
+  }) {
+    // Parse dose to an integer
+    final int doseCount = int.tryParse(dose) ?? 0; // Use 0 if parsing fails
+    if (doseCount <= 0) {
+      throw ArgumentError("Dose must be a positive integer.");
+    }
+
+    // Initialize takenDate map
+    final Map<String, bool> initializedTakenDates = {};
+    for (int i = 0; i < doseCount; i++) {
+      DateTime date = startingDate.add(Duration(days: i));
+      String formattedDate = formatDate(date);
+      initializedTakenDates[formattedDate] = false;
+    }
+
+    // Return the Medicine instance
+    return Medicine(
+      name: name,
+      description: description,
+      type: type,
+      dose: dose,
+      startingDate: startingDate,
+      takenDate: initializedTakenDates,
+    );
+  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -36,23 +72,27 @@ class AddMedicine extends StatelessWidget {
           style: mediumTextStyle,
         ),
         centerTitle: true,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: xLightTextColor,
-            size: 30,
-          ),
-        ),
       ),
       bottomNavigationBar: BottomButton(
-        onTap: () {},
+        onTap: () async {
+          if (_globalKey.currentState!.validate()) {
+            print(descriptionController.text);
+            await addOrUpdateMedicine(createMedicineWithTakenDates(
+              description: descriptionController.text,
+              name: nameController.text,
+              dose: _doseController.text,
+              startingDate: DateTime.now(),
+              type: currentType,
+            ));
+            ref.watch(medicineProvider.notifier).updateList();
+            Navigator.pop(context);
+          }
+        },
         height: 64,
       ),
       body: SafeArea(
         child: Form(
+          key: _globalKey,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             child: SingleChildScrollView(
@@ -79,7 +119,10 @@ class AddMedicine extends StatelessWidget {
                       Expanded(
                         flex: 3,
                         child: NameTextField(
+                          keyboardType: TextInputType.text,
                           controller: nameController,
+                          text: 'Name',
+                          validator: nameValidator,
                         ),
                       ),
                     ],
@@ -90,39 +133,8 @@ class AddMedicine extends StatelessWidget {
                     textAlign: TextAlign.left,
                     style: labelTextStyle,
                   ),
-                  DropdownButtonFormField(
-                    decoration: InputDecoration(
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: xLightTextColor, // Your custom border color
-                          width: 2.0, // Border width
-                        ),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color:
-                              xLightTextColor, // Your custom border color for focus
-                          width: 2.0, // Border width for focus
-                        ),
-                      ),
-                    ),
-                    focusColor: xScaffoldColorLight,
-                    dropdownColor: xScaffoldColorLight,
-                    borderRadius: BorderRadius.circular(20),
-                    value: currentType,
-                    onChanged: (value) {
-                      currentType = value;
-                    },
-                    items: [
-                      for (final drugs in DrugType.values)
-                        DropdownMenuItem(
-                          value: drugs,
-                          child: Text(
-                            drugs.toString().split('.').last,
-                            style: smallTextStyle,
-                          ),
-                        )
-                    ],
+                  DropList(
+                    currentValue: currentType,
                   ),
                   Gap(gapSize),
                   Text(
@@ -132,40 +144,34 @@ class AddMedicine extends StatelessWidget {
                   Center(child: TimePicker()),
                   Gap(gapSize),
                   Text(
-                    "Days",
+                    "Dose",
                     style: labelTextStyle,
                   ),
-                  SizedBox(
-                    height: MediaQuery.sizeOf(context).height / 14,
-                    child: WeekList(
-                      currentWeek: daysOfTheWeek,
-                    ),
+                  NameTextField(
+                    // must only be a number
+                    controller: _doseController,
+                    text: "",
+                    validator: hasNumber,
+                    keyboardType: TextInputType.number,
                   ),
+                  // Gap(gapSize),
+                  // Text(
+                  //   "Days",
+                  //   style: labelTextStyle,
+                  // ),
+                  // SizedBox(
+                  //   height: MediaQuery.sizeOf(context).height / 14,
+                  //   child: WeekList(
+                  //     currentWeek: daysOfTheWeek,
+                  //   ),
+                  // ),
                   Gap(gapSize),
                   Text(
                     "Description",
                     style: labelTextStyle,
                   ),
-                  TextFormField(
-                    minLines: 5,
-                    maxLines: 5,
-                    style: textFieldEntry,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(9.0)),
-                      filled: true,
-                      fillColor: xLightButtonColor,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(9.0),
-                        borderSide: BorderSide(color: xLightButtonColor),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(9.0),
-                        borderSide: BorderSide(
-                          color: xLightButtonColor,
-                        ),
-                      ),
-                    ),
+                  DescriptionField(
+                    controller: descriptionController,
                   ),
                 ],
               ),

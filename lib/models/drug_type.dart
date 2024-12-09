@@ -1,8 +1,7 @@
-enum DrugType {
-  pills,
-  injection,
-  elixir,
-  syrup,
-  nepolyzer,
-}
-
+final List<String> drugType = [
+  'pills',
+  'injection',
+  'elixir',
+  'syrup',
+  'nepolyzer'
+];

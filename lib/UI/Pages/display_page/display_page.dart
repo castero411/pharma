@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:medicine_manager/UI/Theme/Text_style.dart';
 import 'package:medicine_manager/UI/Pages/common/widgets/switch_tile.dart';
 import '../../Provider/provider.dart';
 import '../../Theme/colors.dart';
@@ -20,7 +19,7 @@ class DisplayPage extends ConsumerWidget {
       appBar: AppBar(
         title: Text(
           "Display",
-          style: mediumTextStyle,
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
         centerTitle: true,
         leading: IconButton(
@@ -39,7 +38,7 @@ class DisplayPage extends ConsumerWidget {
           children: [
             SwitchTile(
               icon: Ionicons.pencil_outline,
-              title: "Light Mode",
+              title: "Dark Mode",
               isSwitched: isSwitched,
               onChanged: (bool value) {
                 // Update the provider's state

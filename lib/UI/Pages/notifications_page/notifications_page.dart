@@ -20,7 +20,7 @@ class NotificationsPage extends ConsumerWidget {
       appBar: AppBar(
         title: Text(
           "Notifications",
-          style: mediumTextStyle,
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
         centerTitle: true,
         leading: IconButton(

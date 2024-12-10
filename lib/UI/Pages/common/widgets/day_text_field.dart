@@ -59,7 +59,7 @@ class DayTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
-          style: veryBigTextStyle,
+          style: Theme.of(context).textTheme.bodyLarge,
           textAlign: TextAlign.center,
           controller: textEditingController,
           cursorColor: xLightTextColor,

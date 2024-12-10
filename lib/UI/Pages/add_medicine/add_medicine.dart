@@ -12,6 +12,7 @@ import 'package:medicine_manager/UI/Theme/Text_style.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
 import 'package:medicine_manager/firebase/add_or_update_medicine.dart';
 import 'package:medicine_manager/functions/time/date_to_string.dart';
+import 'package:medicine_manager/functions/time/new_date_with_hours.dart';
 import 'package:medicine_manager/functions/validation/medicine_form_validator.dart';
 import 'package:medicine_manager/models/medicine.dart';
 
@@ -75,13 +76,17 @@ class AddMedicine extends ConsumerWidget {
       ),
       bottomNavigationBar: BottomButton(
         onTap: () async {
+          DateTime currnetDate = DateTime.now();
+          TimeOfDay timeOfDay = ref.watch(timeProvider);
+
           if (_globalKey.currentState!.validate()) {
             print(descriptionController.text);
             await addOrUpdateMedicine(createMedicineWithTakenDates(
               description: descriptionController.text,
               name: nameController.text,
               dose: _doseController.text,
-              startingDate: DateTime.now(),
+              startingDate:
+                  editDate(currnetDate, timeOfDay.hour, timeOfDay.minute),
               type: currentType,
             ));
             ref.watch(medicineProvider.notifier).updateList();
@@ -138,13 +143,13 @@ class AddMedicine extends ConsumerWidget {
                   ),
                   Gap(gapSize),
                   Text(
-                    "Period",
+                    "Time",
                     style: labelTextStyle,
                   ),
                   Center(child: TimePicker()),
                   Gap(gapSize),
                   Text(
-                    "Dose",
+                    "Dose count",
                     style: labelTextStyle,
                   ),
                   NameTextField(

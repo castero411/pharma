@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medicine_manager/UI/Theme/Text_style.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
 
 class SettingsTile extends StatelessWidget {
@@ -25,14 +24,14 @@ class SettingsTile extends StatelessWidget {
               child: Icon(
                 icon,
                 size: 30,
-                color: xLightTextColor,
+                color: Theme.of(context).indicatorColor,
               ),
             ),
             Expanded(
               flex: 1,
               child: Text(
                 title,
-                style: smallTextStyle,
+                style: Theme.of(context).textTheme.labelMedium,
               ),
             ),
             Icon(

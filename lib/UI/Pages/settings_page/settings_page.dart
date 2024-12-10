@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
@@ -32,13 +33,13 @@ class SettingsPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            SettingsTile(
-              icon: Ionicons.person_circle_outline,
-              title: "Account",
-              onTap: () {
-                //TODO: create an account page
-              },
-            ),
+            // SettingsTile(
+            //   icon: Ionicons.person_circle_outline,
+            //   title: "Account",
+            //   onTap: () {
+            //     //TODO: create an account page
+            //   },
+            // ),
             SettingsTile(
               icon: Ionicons.notifications_outline,
               title: "Notifications",
@@ -56,7 +57,12 @@ class SettingsPage extends StatelessWidget {
             SettingsTile(
               icon: Ionicons.log_out_outline,
               title: "Log out",
-              onTap: () {},
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, "login_page");
+              },
             )
           ],
         ),

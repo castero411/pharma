@@ -27,6 +27,7 @@ class TimePicker extends ConsumerWidget {
             Navigator.of(context).push(
               showPicker(
                 context: context,
+                accentColor: xLightTextColor,
                 value: convertToTime(selectedTime), // Convert TimeOfDay to Time
                 onChange: (newTime) {
                   ref.read(timeProvider.notifier).state = convertToTimeOfDay(

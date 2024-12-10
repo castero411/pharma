@@ -8,6 +8,7 @@ FormFieldValidator hasNumber = (value) {
   if (!(numericRegex.hasMatch(value))) {
     return 'please enter numbers only';
   }
+  return null;
 };
 
 FormFieldValidator nameValidator = (value) {

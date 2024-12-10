@@ -1,12 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 
 import 'package:medicine_manager/UI/Pages/common/widgets/custom_form_field.dart';
 import 'package:medicine_manager/UI/Pages/common/widgets/wide_button.dart';
-import 'package:medicine_manager/UI/Pages/login_page/widgets/login_with_button.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
 import 'package:medicine_manager/functions/validation/email_form_validation.dart';
@@ -42,9 +40,9 @@ class LoginPage extends ConsumerWidget {
                 children: [
                   // Logo (you can replace this with an actual logo)
                   Text(
-                    'LOGO',
+                    'MedGuard',
                     style: TextStyle(
-                        color: xMainColor,
+                        color: Theme.of(context).primaryColor,
                         fontSize: 50,
                         fontWeight: FontWeight.w900),
                   ),
@@ -54,7 +52,7 @@ class LoginPage extends ConsumerWidget {
                     child: Text(
                       'Welcome Back!',
                       textAlign: TextAlign.left,
-                      style: bigTextStyle,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
                   Gap(gapSize),
@@ -74,17 +72,18 @@ class LoginPage extends ConsumerWidget {
                     controller: _passwordController,
                   ),
 
-                  Gap(gapSize),
+                  Gap(gapSize - 10),
                   InkWell(
                     child: Text(
                       "Don't Have an account ?",
-                      style: mediumTextStyle.copyWith(color: xMainColor),
+                      style: mediumTextStyle.copyWith(
+                          color: xMainColor, fontSize: 20),
                     ),
                     onTap: () {
                       Navigator.of(context).pushNamed("signup_page");
                     },
                   ),
-                  Gap(gapSize),
+                  Gap(gapSize - 10),
 
                   WideButton(
                     title: 'Log in',
@@ -127,24 +126,25 @@ class LoginPage extends ConsumerWidget {
                   Gap(gapSize * 2),
                   Divider(),
                   Gap(gapSize),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      LoginWithButton(
-                        onTap: () {
-                          // Handle Google login
-                        },
-                        faIcon: FontAwesomeIcons.google,
-                      ),
-                      LoginWithButton(
-                        onTap: () {
-                          // Handle Facebook login
-                        },
-                        faIcon: FontAwesomeIcons.facebook,
-                      ),
-                    ],
-                  ),
+                  //TODO add log in with gmail and facebook
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                  //   children: [
+                  //     LoginWithButton(
+                  //       onTap: () {
+                  //         // Handle Google login
+                  //       },
+                  //       faIcon: FontAwesomeIcons.google,
+                  //     ),
+                  //     LoginWithButton(
+                  //       onTap: () {
+                  //         // Handle Facebook login
+                  //       },
+                  //       faIcon: FontAwesomeIcons.facebook,
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
             ),

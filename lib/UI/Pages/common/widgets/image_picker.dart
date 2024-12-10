@@ -6,7 +6,5 @@ pickImage() async {
   XFile? xFile = await ImagePicker().pickImage(source: ImageSource.gallery);
   File image = File(xFile!.path);
 
-  if (image != null) {
-    return image;
-  }
+  return image;
 }

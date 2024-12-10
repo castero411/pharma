@@ -25,7 +25,7 @@ class SwitchTile extends StatelessWidget {
         onChanged: onChanged,
         title: Text(
           title,
-          style: TextStyle(color: xLightTextColor),
+          style: Theme.of(context).textTheme.labelMedium,
         ),
         secondary: Icon(
           icon,

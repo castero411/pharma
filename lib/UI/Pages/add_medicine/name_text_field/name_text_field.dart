@@ -20,6 +20,7 @@ class NameTextField extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: TextFormField(
+        style: textFieldEntry,
         validator: validator,
         keyboardType: keyboardType,
         controller: controller,
@@ -27,7 +28,7 @@ class NameTextField extends StatelessWidget {
         cursorColor: xLightTextColor,
         decoration: InputDecoration(
           labelText: text,
-          labelStyle: labelTextStyle,
+          labelStyle: Theme.of(context).textTheme.labelMedium,
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(
               color: xLightTextColor,

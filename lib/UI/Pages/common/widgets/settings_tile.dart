@@ -25,14 +25,14 @@ class SettingsTile extends StatelessWidget {
               child: Icon(
                 icon,
                 size: 30,
-                color: xLightTextColor,
+                color: Theme.of(context).indicatorColor,
               ),
             ),
             Expanded(
               flex: 1,
               child: Text(
                 title,
-                style: smallTextStyle,
+                style: Theme.of(context).textTheme.labelMedium,
               ),
             ),
             Icon(

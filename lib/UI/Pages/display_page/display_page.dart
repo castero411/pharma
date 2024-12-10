@@ -20,7 +20,7 @@ class DisplayPage extends ConsumerWidget {
       appBar: AppBar(
         title: Text(
           "Display",
-          style: mediumTextStyle,
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
         centerTitle: true,
         leading: IconButton(
@@ -39,7 +39,7 @@ class DisplayPage extends ConsumerWidget {
           children: [
             SwitchTile(
               icon: Ionicons.pencil_outline,
-              title: "Light Mode",
+              title: "Dark Mode",
               isSwitched: isSwitched,
               onChanged: (bool value) {
                 // Update the provider's state

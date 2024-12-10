@@ -12,13 +12,14 @@ class BottomButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: ColoredBox(
-        color: xMainColor,
+        color: Theme.of(context).primaryColor,
         child: SizedBox(
           height: height,
           child: Center(
             child: Text(
               "Done",
-              style: veryBigTextStyle.copyWith(color: xScaffoldColorLight),
+              style: veryBigTextStyle.copyWith(
+                  color: Theme.of(context).scaffoldBackgroundColor),
             ),
           ),
         ),

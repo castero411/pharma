@@ -44,7 +44,7 @@ class LoginPage extends ConsumerWidget {
                   Text(
                     'MedGuard',
                     style: TextStyle(
-                        color: xMainColor,
+                        color: Theme.of(context).primaryColor,
                         fontSize: 50,
                         fontWeight: FontWeight.w900),
                   ),
@@ -54,7 +54,7 @@ class LoginPage extends ConsumerWidget {
                     child: Text(
                       'Welcome Back!',
                       textAlign: TextAlign.left,
-                      style: bigTextStyle,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
                   Gap(gapSize),

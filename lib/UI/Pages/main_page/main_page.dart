@@ -27,6 +27,9 @@ class MainPage extends ConsumerWidget {
                 },
                 value: [currentDay],
                 config: CalendarDatePicker2Config(
+                  selectedDayHighlightColor: Theme.of(context).primaryColor,
+                  daySplashColor:
+                      Theme.of(context).primaryColor.withOpacity(.3),
                   calendarType: CalendarDatePicker2Type.single,
                 ),
               ),

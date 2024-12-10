@@ -17,14 +17,14 @@ class LoginWithButton extends StatelessWidget {
       child: Material(
         borderRadius: BorderRadius.circular(size - size * 0.7),
         elevation: 4,
-        color: xScaffoldColorLight,
+        color: Theme.of(context).scaffoldBackgroundColor,
         child: InkWell(
           borderRadius: BorderRadius.circular(size - size * 0.7),
           onTap: onTap,
           child: Center(
             child: FaIcon(
               faIcon,
-              color: xMainColor,
+              color: Theme.of(context).primaryColor,
               size: size - 30,
             ),
           ),

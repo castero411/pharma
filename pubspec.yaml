@@ -38,14 +38,14 @@ flutter_native_splash:
   android: true
   ios: true
   web: false
-  color: "#154FE3"
-  color_dark: "#154FE3"
-  image: "assets/logo.jpg"
+  color: "#084059"
+  color_dark: "#084059"
+  image: "assets/MedGuardCircleTemp.png"
 
   android_12:
-    color: "#154FE3"
-    color_dark: "#154FE3"
-    image: "assets/logo.jpg"
+    color: "#084059"
+    color_dark: "#084059"
+    image: "assets/MedGuardCircleTemp.png"
 
 
 dev_dependencies:

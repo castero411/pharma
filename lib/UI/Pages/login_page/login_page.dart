@@ -42,7 +42,7 @@ class LoginPage extends ConsumerWidget {
                 children: [
                   // Logo (you can replace this with an actual logo)
                   Text(
-                    'LOGO',
+                    'MedGuard',
                     style: TextStyle(
                         color: xMainColor,
                         fontSize: 50,
@@ -74,17 +74,18 @@ class LoginPage extends ConsumerWidget {
                     controller: _passwordController,
                   ),
 
-                  Gap(gapSize),
+                  Gap(gapSize - 10),
                   InkWell(
                     child: Text(
                       "Don't Have an account ?",
-                      style: mediumTextStyle.copyWith(color: xMainColor),
+                      style: mediumTextStyle.copyWith(
+                          color: xMainColor, fontSize: 20),
                     ),
                     onTap: () {
                       Navigator.of(context).pushNamed("signup_page");
                     },
                   ),
-                  Gap(gapSize),
+                  Gap(gapSize - 10),
 
                   WideButton(
                     title: 'Log in',
@@ -127,24 +128,25 @@ class LoginPage extends ConsumerWidget {
                   Gap(gapSize * 2),
                   Divider(),
                   Gap(gapSize),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      LoginWithButton(
-                        onTap: () {
-                          // Handle Google login
-                        },
-                        faIcon: FontAwesomeIcons.google,
-                      ),
-                      LoginWithButton(
-                        onTap: () {
-                          // Handle Facebook login
-                        },
-                        faIcon: FontAwesomeIcons.facebook,
-                      ),
-                    ],
-                  ),
+                  //TODO add log in with gmail and facebook
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                  //   children: [
+                  //     LoginWithButton(
+                  //       onTap: () {
+                  //         // Handle Google login
+                  //       },
+                  //       faIcon: FontAwesomeIcons.google,
+                  //     ),
+                  //     LoginWithButton(
+                  //       onTap: () {
+                  //         // Handle Facebook login
+                  //       },
+                  //       faIcon: FontAwesomeIcons.facebook,
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
             ),

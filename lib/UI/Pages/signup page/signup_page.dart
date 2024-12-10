@@ -7,6 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:medicine_manager/UI/Pages/common/widgets/custom_form_field.dart';
 import 'package:medicine_manager/UI/Pages/common/widgets/wide_button.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
+import 'package:medicine_manager/UI/Theme/colors.dart';
 import 'package:medicine_manager/firebase/create_user_document.dart';
 import 'package:medicine_manager/functions/validation/email_form_validation.dart';
 
@@ -39,7 +40,7 @@ class SignupPage extends ConsumerWidget {
         if (user != null) {
           createEmptyUserDocument();
           // Navigate to the main page after successful registration
-
+          Navigator.pop(context);
           Navigator.pushReplacementNamed(context, 'main_page');
         }
       } on FirebaseAuthException catch (e) {
@@ -64,6 +65,7 @@ class SignupPage extends ConsumerWidget {
     double gapSize = 28; // for easier customization when adding flexibility
 
     return Scaffold(
+      appBar: AppBar(),
       body: Padding(
         padding: EdgeInsets.all(23),
         child: Center(
@@ -76,7 +78,13 @@ class SignupPage extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset('assets/logo.jpg'),
+                  Text(
+                    'MedGuard',
+                    style: TextStyle(
+                        color: xMainColor,
+                        fontSize: 50,
+                        fontWeight: FontWeight.w900),
+                  ),
                   Gap(gapSize * 2),
                   SizedBox(
                     width: double.infinity,
@@ -117,6 +125,7 @@ class SignupPage extends ConsumerWidget {
                     onTap: () => _signUp(ref, context),
                   ),
                   Gap(gapSize * 2),
+                  Divider(),
                 ],
               ),
             ),

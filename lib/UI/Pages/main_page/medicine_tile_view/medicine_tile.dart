@@ -11,65 +11,71 @@ class MedicineTile extends StatelessWidget {
   final String time;
   final String name;
   final bool taken;
+  //TODO : add the onHold function to display all medicine details
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 70,
-      width: double.infinity,
-      child: Material(
-        color: xContainerColor,
-        borderRadius: BorderRadius.circular(10),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              flex: 5,
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Material(
-                  borderRadius: BorderRadius.circular(7),
-                  color: xMainColor,
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: Center(
-                      child: Text(
-                        time,
-                        style: whiteTextStyle,
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 5),
+      child: SizedBox(
+        height: 70,
+        width: double.infinity,
+        child: Material(
+          color: xContainerColor,
+          borderRadius: BorderRadius.circular(10),
+          child: InkWell(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 6,
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Material(
+                      borderRadius: BorderRadius.circular(7),
+                      color: xMainColor,
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: double.infinity,
+                        child: Center(
+                          child: Text(
+                            time,
+                            style: whiteTextStyle.copyWith(fontSize: 18),
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ),
-            Expanded(
-              flex: 10,
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      name,
-                      style: mediumTextStyle.copyWith(fontSize: 20),
+                Expanded(
+                  flex: 10,
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: double.infinity,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          name,
+                          style: mediumTextStyle.copyWith(fontSize: 20),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
-            Expanded(
-              flex: 4,
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Icon(
-                  taken ? Icons.check : Icons.close_rounded,
+                Expanded(
+                  flex: 4,
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Icon(
+                      taken ? Icons.check : Icons.close_rounded,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

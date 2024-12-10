@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,14 +16,14 @@ class SignupPage extends ConsumerWidget {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController usernameController = TextEditingController();
+  //final TextEditingController usernameController = TextEditingController();
 
   Future<void> _signUp(WidgetRef ref, BuildContext context) async {
     if (_formKey.currentState?.validate() ?? false) {
       // Form is valid, perform the sign-up
-      final username = usernameController.text;
+      //final username = usernameController.text;
       final email = emailController.text;
-      final password = passwordController.text!;
+      final password = passwordController.text;
 
       try {
         // Sign up with Firebase Authentication
@@ -94,15 +92,15 @@ class SignupPage extends ConsumerWidget {
                       style: bigTextStyle,
                     ),
                   ),
-                  Gap(gapSize),
-                  CustomFormField(
-                    // username text form field
-                    hint: 'Username',
-                    obscure: false,
-                    validator: (value) =>
-                        value!.isEmpty ? 'Please enter a username' : null,
-                    controller: usernameController,
-                  ),
+                  // Gap(gapSize),
+                  // CustomFormField(
+                  //   // username text form field
+                  //   hint: 'Username',
+                  //   obscure: false,
+                  //   validator: (value) =>
+                  //       value!.isEmpty ? 'Please enter a username' : null,
+                  //   controller: usernameController,
+                  // ),
                   Gap(gapSize - 5),
                   CustomFormField(
                     // email text form field

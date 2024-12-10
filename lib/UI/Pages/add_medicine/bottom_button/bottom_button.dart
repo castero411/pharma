@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
-import 'package:medicine_manager/UI/Theme/colors.dart';
 
 class BottomButton extends StatelessWidget {
   const BottomButton({super.key, required this.onTap, required this.height});

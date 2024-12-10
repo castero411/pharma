@@ -1,12 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 
 import 'package:medicine_manager/UI/Pages/common/widgets/custom_form_field.dart';
 import 'package:medicine_manager/UI/Pages/common/widgets/wide_button.dart';
-import 'package:medicine_manager/UI/Pages/login_page/widgets/login_with_button.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
 import 'package:medicine_manager/functions/validation/email_form_validation.dart';

@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:medicine_manager/UI/Pages/account_page/account_page.dart';
 
 import 'package:medicine_manager/UI/Pages/add_medicine/add_medicine.dart';
 import 'package:medicine_manager/UI/Pages/display_page/display_page.dart';
@@ -64,6 +65,7 @@ class _MedicalAppState extends State<MedicalApp> {
             'notifications': (context) => NotificationsPage(),
             'display': (context) => DisplayPage(),
             'add_medicine': (context) => AddMedicine(),
+            'account_page': (context) => AccountPage(),
           },
         );
       },

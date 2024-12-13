@@ -1,3 +1,6 @@
+// ignore_for_file: unused_element, avoid_print
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,12 +19,12 @@ class SignupPage extends ConsumerWidget {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  //final TextEditingController usernameController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
 
   Future<void> _signUp(WidgetRef ref, BuildContext context) async {
     if (_formKey.currentState?.validate() ?? false) {
       // Form is valid, perform the sign-up
-      //final username = usernameController.text;
+      final username = usernameController.text;
       final email = emailController.text;
       final password = passwordController.text;
 
@@ -36,7 +39,8 @@ class SignupPage extends ConsumerWidget {
         // After successful sign-up, save additional details (like username)
         final user = userCredential.user;
         if (user != null) {
-          createEmptyUserDocument();
+          createEmptyUserDocument(username: username, email: email);
+
           // Navigate to the main page after successful registration
           Navigator.pop(context);
           Navigator.pushReplacementNamed(context, 'main_page');
@@ -92,15 +96,15 @@ class SignupPage extends ConsumerWidget {
                       style: bigTextStyle,
                     ),
                   ),
-                  // Gap(gapSize),
-                  // CustomFormField(
-                  //   // username text form field
-                  //   hint: 'Username',
-                  //   obscure: false,
-                  //   validator: (value) =>
-                  //       value!.isEmpty ? 'Please enter a username' : null,
-                  //   controller: usernameController,
-                  // ),
+                  Gap(gapSize),
+                  CustomFormField(
+                    // username text form field
+                    hint: 'Username',
+                    obscure: false,
+                    validator: (value) =>
+                        value!.isEmpty ? 'Please enter a username' : null,
+                    controller: usernameController,
+                  ),
                   Gap(gapSize - 5),
                   CustomFormField(
                     // email text form field

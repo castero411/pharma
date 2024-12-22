@@ -8,7 +8,8 @@ import 'package:medicine_manager/functions/time/time_to_string.dart';
 import 'package:medicine_manager/models/medicine.dart';
 
 class MedicineList extends ConsumerWidget {
-  const MedicineList({super.key});
+  const MedicineList({super.key, required this.onTap});
+  final Function(Medicine) onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,6 +24,10 @@ class MedicineList extends ConsumerWidget {
         String time = formatTime(currentMedicines[item].startingDate);
 
         return MedicineTile(
+          onTap: () {
+            //ref.read(showingMedicineProvider.notifier).state = currentMedicines[item];
+            onTap(currentMedicines[item]);
+          },
           time: time,
           name: currentMedicines[item].name,
           taken: currentMedicines[item].takenDate[currentDate]
@@ -32,3 +37,5 @@ class MedicineList extends ConsumerWidget {
     );
   }
 }
+
+class SelectedMedicineProvider {}

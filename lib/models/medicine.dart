@@ -5,6 +5,7 @@ class Medicine {
   final String description;
   final String type;
   final String dose;
+  final String doseCount;
   final DateTime startingDate;
   final Map<String, bool> takenDate;
 
@@ -13,6 +14,7 @@ class Medicine {
     required this.name,
     required this.description,
     required this.dose,
+    required this.doseCount,
     required this.startingDate,
     required this.takenDate,
   });
@@ -24,6 +26,7 @@ class Medicine {
       'description': description,
       'type': type,
       'dose': dose,
+      'doseCount': doseCount,
       'startingDate': startingDate,
       'takenDate': takenDate,
     };
@@ -36,6 +39,7 @@ class Medicine {
       name: data['name'] ?? '',
       description: data['description'] ?? '',
       dose: data['dose'] ?? '',
+      doseCount: data["doseCount"] ?? '',
       startingDate:
           (data['startingDate'] as Timestamp?)?.toDate() ?? DateTime.now(),
       takenDate: Map<String, bool>.from(data['takenDate'] ?? {}),

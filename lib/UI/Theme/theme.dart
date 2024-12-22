@@ -19,39 +19,18 @@ var lightTheme = ThemeData.light().copyWith(
     bodySmall: smallTextStyle,
     labelMedium: smallTextStyle,
     labelLarge: labelTextStyle,
+    headlineMedium: mediumTextStyle,
   ),
-  inputDecorationTheme: InputDecorationTheme(
-    enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(
-        color: xEnabledBorder,
-        width: 2,
-      ),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(
-        color: xLightTextColor,
-        width: 2.0,
-      ),
-    ),
-    focusedErrorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(
-        color: Colors.redAccent,
-        width: 2.0,
-      ),
-    ),
-    errorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(
-        color: Colors.redAccent,
-        width: 2.0,
-      ),
-    ),
+  colorScheme: ColorScheme.light().copyWith(
+    primary: xMainColor,
+    onPrimary: xScaffoldColorLight,
+    secondary: xSecondaryColor,
+    onSecondary: xSecondaryColor.withOpacity(.3),
+    
   ),
 );
 
 var darkTheme = ThemeData.dark().copyWith(
-  primaryColor: Colors.black,
+  primaryColor: xMainColor,
   buttonTheme: ButtonThemeData(buttonColor: xMainColor),
 );

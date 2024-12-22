@@ -21,4 +21,5 @@ FormFieldValidator nameValidator = (value) {
   if (value.length < 4) {
     return 'name is less than 4';
   }
+  return null;
 };

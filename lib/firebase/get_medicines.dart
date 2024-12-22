@@ -34,6 +34,7 @@ Future<List<Medicine>> getMedicines() async {
         description: entry.value['description'] ?? '',
         type: entry.value['type'] ?? '',
         dose: entry.value['dose'] ?? '',
+        doseCount: entry.value['doseCount'] ?? '',
         startingDate: (entry.value['startingDate'] as Timestamp).toDate(),
         takenDate: Map<String, bool>.from(entry.value['takenDate'] ?? {}),
       );

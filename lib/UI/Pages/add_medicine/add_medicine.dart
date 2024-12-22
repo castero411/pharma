@@ -29,18 +29,21 @@ class AddMedicine extends ConsumerWidget {
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
-  final TextEditingController _doseController = TextEditingController();
+  final TextEditingController _doseCountController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+  final TextEditingController _doseController = TextEditingController();
 
   Medicine createMedicineWithTakenDates({
     required String name,
     required String description,
     required String type,
     required String dose,
+    required String doseNumber,
     required DateTime startingDate,
   }) {
     // Parse dose to an integer
-    final int doseCount = int.tryParse(dose) ?? 0; // Use 0 if parsing fails
+    final int doseCount =
+        int.tryParse(doseNumber) ?? 0; // Use 0 if parsing fails
     if (doseCount <= 0) {
       throw ArgumentError("Dose must be a positive integer.");
     }
@@ -59,6 +62,7 @@ class AddMedicine extends ConsumerWidget {
       description: description,
       type: type,
       dose: dose,
+      doseCount: doseNumber,
       startingDate: startingDate,
       takenDate: initializedTakenDates,
     );
@@ -70,7 +74,7 @@ class AddMedicine extends ConsumerWidget {
       appBar: AppBar(
         title: Text(
           "Add Medicine",
-          style: mediumTextStyle,
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
         centerTitle: true,
       ),
@@ -82,6 +86,7 @@ class AddMedicine extends ConsumerWidget {
           if (_globalKey.currentState!.validate()) {
             print(descriptionController.text);
             await addOrUpdateMedicine(createMedicineWithTakenDates(
+              doseNumber: _doseCountController.text,
               description: descriptionController.text,
               name: nameController.text,
               dose: _doseController.text,
@@ -149,16 +154,29 @@ class AddMedicine extends ConsumerWidget {
                   Center(child: TimePicker()),
                   Gap(gapSize),
                   Text(
-                    "Dose count",
+                    "Dose",
                     style: labelTextStyle,
                   ),
                   NameTextField(
                     // must only be a number
                     controller: _doseController,
                     text: "",
+                    validator: nameValidator,
+                    keyboardType: TextInputType.text,
+                  ),
+                  Gap(gapSize),
+                  Text(
+                    "Dose count",
+                    style: labelTextStyle,
+                  ),
+                  NameTextField(
+                    // must only be a number
+                    controller: _doseCountController,
+                    text: "",
                     validator: hasNumber,
                     keyboardType: TextInputType.number,
                   ),
+
                   // Gap(gapSize),
                   // Text(
                   //   "Days",

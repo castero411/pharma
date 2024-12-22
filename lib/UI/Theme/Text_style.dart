@@ -41,3 +41,5 @@ var textFieldEntry = TextStyle(
   color: xLightTextColor,
   fontSize: 16,
 );
+
+var sheetNameTextStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.w800);

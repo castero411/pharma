@@ -12,6 +12,7 @@ import 'package:medicine_manager/UI/Pages/main_page/main_page.dart';
 import 'package:medicine_manager/UI/Pages/notifications_page/notifications_page.dart';
 import 'package:medicine_manager/UI/Pages/settings_page/settings_page.dart';
 import 'package:medicine_manager/UI/Pages/signup%20page/signup_page.dart';
+import 'package:medicine_manager/UI/Provider/provider.dart';
 
 import 'package:medicine_manager/UI/Theme/theme.dart';
 
@@ -23,14 +24,14 @@ void main() async {
   runApp(ProviderScope(child: const MedicalApp()));
 }
 
-class MedicalApp extends StatefulWidget {
+class MedicalApp extends ConsumerStatefulWidget {
   const MedicalApp({super.key});
 
   @override
-  State<MedicalApp> createState() => _MedicalAppState();
+  ConsumerState<MedicalApp> createState() => _MedicalAppState();
 }
 
-class _MedicalAppState extends State<MedicalApp> {
+class _MedicalAppState extends ConsumerState<MedicalApp> {
   @override
   void initState() {
     super.initState();
@@ -46,6 +47,8 @@ class _MedicalAppState extends State<MedicalApp> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = ref.watch(displaySwitchProvider);
+
     return Consumer(
       builder: (context, ref, _) {
         // We load the user from SharedPreferences
@@ -55,7 +58,7 @@ class _MedicalAppState extends State<MedicalApp> {
 
         // If no user is found, navigate to the login page, otherwise to the main page
         return MaterialApp(
-          theme: lightTheme,
+          theme: isDarkMode ? darkTheme : lightTheme,
           home: user == null ? LoginPage() : MainPage(),
           routes: {
             'login_page': (context) => LoginPage(),

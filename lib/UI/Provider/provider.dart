@@ -1,6 +1,7 @@
 // provider.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:medicine_manager/models/medicine.dart';
 
 // this is the provider for the switches widgets
 final switchProvider = StateProvider<bool>((ref) => false);

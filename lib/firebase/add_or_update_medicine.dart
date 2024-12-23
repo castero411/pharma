@@ -23,9 +23,6 @@ Future<void> addOrUpdateMedicine(Medicine medicine) async {
       },
       SetOptions(merge: true), // Merge ensures existing data isn't overwritten
     );
-
-    print(
-        "Medicine '${medicine.name}' added or updated successfully for user with UID: $uid");
   } catch (e) {
     print("Error adding or updating medicine in Firestore: $e");
   }

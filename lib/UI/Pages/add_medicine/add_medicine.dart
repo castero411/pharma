@@ -72,6 +72,7 @@ class AddMedicine extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: Theme.of(context).primaryColor,
         title: Text(
           "Add Medicine",
           style: Theme.of(context).textTheme.headlineMedium,
@@ -84,7 +85,6 @@ class AddMedicine extends ConsumerWidget {
           TimeOfDay timeOfDay = ref.watch(timeProvider);
 
           if (_globalKey.currentState!.validate()) {
-            print(descriptionController.text);
             await addOrUpdateMedicine(createMedicineWithTakenDates(
               doseNumber: _doseCountController.text,
               description: descriptionController.text,
@@ -166,7 +166,7 @@ class AddMedicine extends ConsumerWidget {
                   ),
                   Gap(gapSize),
                   Text(
-                    "Dose count",
+                    "Number of days",
                     style: labelTextStyle,
                   ),
                   NameTextField(

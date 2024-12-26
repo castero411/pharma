@@ -76,7 +76,7 @@ class MedicineTile extends StatelessWidget {
                   ),
                   Expanded(
                     flex: 4,
-                    child: InkWell(
+                    child: GestureDetector(
                       onTap: onTapIcon,
                       child: Padding(
                         padding: EdgeInsets.all(10),

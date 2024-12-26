@@ -9,10 +9,18 @@ import 'package:medicine_manager/UI/Provider/medicine_provider.dart';
 import 'package:medicine_manager/UI/Provider/provider.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
 import 'package:medicine_manager/models/medicine.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class MainPage extends ConsumerWidget {
   const MainPage({super.key});
+
+  void takeMedicineDialog(
+      BuildContext context, WidgetRef ref, Medicine medicine) {
+    showDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return Dialog();
+        });
+  }
 
   void showDatePicker(BuildContext context, WidgetRef ref) async {
     final currentDay = ref.watch(dateProvider);
@@ -100,7 +108,8 @@ class MainPage extends ConsumerWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: MedicineList(
-                onTap: (medicine) {
+                takeMedicine: (medicine) {},
+                onHold: (medicine) {
                   showBottomSheet(context, medicine, ref);
                 },
               ),

@@ -3,16 +3,19 @@ import 'package:medicine_manager/UI/Theme/Text_style.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
 
 class MedicineTile extends StatelessWidget {
-  const MedicineTile(
-      {super.key,
-      this.time = '10:40',
-      this.name = 'placeholder',
-      this.taken = false,
-      required this.onTap});
+  const MedicineTile({
+    super.key,
+    this.time = '10:40',
+    this.name = 'placeholder',
+    this.taken = false,
+    required this.onTapBody,
+    required this.onTapIcon,
+  });
   final String time;
   final String name;
   final bool taken;
-  final Function() onTap;
+  final Function() onTapBody;
+  final Function() onTapIcon;
 
   //TODO : add the onHold function to display all medicine details
 
@@ -21,7 +24,7 @@ class MedicineTile extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 5),
       child: InkWell(
-        onTap: onTap,
+        onTap: onTapBody,
         child: SizedBox(
           height: 70,
           width: double.infinity,
@@ -73,10 +76,18 @@ class MedicineTile extends StatelessWidget {
                   ),
                   Expanded(
                     flex: 4,
-                    child: Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Icon(
-                        taken ? Icons.check : Icons.close_rounded,
+                    child: InkWell(
+                      onTap: onTapIcon,
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: CircleAvatar(
+                          backgroundColor:
+                              Theme.of(context).scaffoldBackgroundColor,
+                          child: Icon(
+                            taken ? Icons.check : Icons.close_rounded,
+                            color: Theme.of(context).textTheme.bodyLarge!.color,
+                          ),
+                        ),
                       ),
                     ),
                   ),

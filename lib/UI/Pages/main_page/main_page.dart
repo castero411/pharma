@@ -69,6 +69,7 @@ class MainPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: Theme.of(context).primaryColor,
         title: Text("Welcome Back"),
         actions: [
           IconButton(

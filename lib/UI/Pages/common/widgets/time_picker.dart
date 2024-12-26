@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:day_night_time_picker/day_night_time_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
-import 'package:medicine_manager/UI/Theme/colors.dart';
 import 'package:medicine_manager/UI/vague_widgets/decorated_box.dart';
 import '../../../Provider/provider.dart';
 
@@ -27,7 +26,7 @@ class TimePicker extends ConsumerWidget {
             Navigator.of(context).push(
               showPicker(
                 context: context,
-                accentColor: xLightTextColor,
+                accentColor: Theme.of(context).primaryColor,
                 value: convertToTime(selectedTime), // Convert TimeOfDay to Time
                 onChange: (newTime) {
                   ref.read(timeProvider.notifier).state = convertToTimeOfDay(
@@ -39,7 +38,8 @@ class TimePicker extends ConsumerWidget {
           child: Center(
             child: Text(
               selectedTime.format(context),
-              style: veryBigTextStyle,
+              style: veryBigTextStyle.copyWith(
+                  color: Theme.of(context).iconTheme.color),
             ),
           ),
         ),

@@ -36,7 +36,7 @@ class SettingsTile extends StatelessWidget {
             ),
             Icon(
               Icons.arrow_forward_ios_rounded,
-              color: xLightTextColor,
+              color: Theme.of(context).iconTheme.color,
             ),
           ],
         ),

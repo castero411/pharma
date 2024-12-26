@@ -20,15 +20,6 @@ class AccountPage extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: Theme.of(context).primaryColor,
-          ),
-        ),
       ),
       body: userId == null
           ? Center(

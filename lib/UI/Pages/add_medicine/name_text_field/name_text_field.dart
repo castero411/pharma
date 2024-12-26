@@ -25,19 +25,19 @@ class NameTextField extends StatelessWidget {
         keyboardType: keyboardType,
         controller: controller,
         autocorrect: false,
-        cursorColor: xLightTextColor,
+        cursorColor: Theme.of(context).iconTheme.color,
         decoration: InputDecoration(
           labelText: text,
           labelStyle: Theme.of(context).textTheme.labelMedium,
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(
-              color: xLightTextColor,
+              color: Theme.of(context).iconTheme.color!,
               width: 2,
             ),
           ),
           focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(
-              color: xLightTextColor,
+              color: Theme.of(context).iconTheme.color!,
               width: 2,
             ),
           ),

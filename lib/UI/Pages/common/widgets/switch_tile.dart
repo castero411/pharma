@@ -30,7 +30,7 @@ class SwitchTile extends StatelessWidget {
         secondary: Icon(
           icon,
           size: 30,
-          color: xLightTextColor,
+          color: Theme.of(context).iconTheme.color,
         ),
       ),
     );

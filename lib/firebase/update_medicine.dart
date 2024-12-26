@@ -14,14 +14,9 @@ Future<void> updateMedicineState(String medicineName, String date) async {
     // Reference the user's document in Firestore
     final userDocRef = FirebaseFirestore.instance.collection('users').doc(uid);
 
-    try {
-      await userDocRef.update(
-        {'medicines.$medicineName.takenDate.$date': true},
-      );
-    } catch (e) {
-      print(e);
-    }
-    print("done");
+    await userDocRef.update(
+      {'medicines.$medicineName.takenDate.$date': true},
+    );
   } catch (e) {
     print(e);
   }

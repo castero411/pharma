@@ -14,19 +14,22 @@ class DropList extends StatelessWidget {
       decoration: InputDecoration(
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: xLightTextColor, // Your custom border color
+            color:
+                Theme.of(context).iconTheme.color!, // Your custom border color
             width: 2.0, // Border width
           ),
         ),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: xLightTextColor, // Your custom border color for focus
+            color: Theme.of(context)
+                .iconTheme
+                .color!, // Your custom border color for focus
             width: 2.0, // Border width for focus
           ),
         ),
       ),
-      focusColor: xScaffoldColorLight,
-      dropdownColor: xScaffoldColorLight,
+      focusColor: Theme.of(context).scaffoldBackgroundColor,
+      dropdownColor: Theme.of(context).scaffoldBackgroundColor,
       borderRadius: BorderRadius.circular(20),
       value: currentValue,
       onChanged: (value) {
@@ -38,7 +41,8 @@ class DropList extends StatelessWidget {
             value: drugs,
             child: Text(
               drugs.split('.').last,
-              style: smallTextStyle,
+              style: smallTextStyle.copyWith(
+                  color: Theme.of(context).iconTheme.color),
             ),
           )
       ],

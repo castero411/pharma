@@ -121,7 +121,7 @@ class AddMedicine extends ConsumerWidget {
                           height: 70,
                           child: Material(
                             borderRadius: BorderRadius.circular(20),
-                            color: xLightTextColor,
+                            color: Theme.of(context).iconTheme.color,
                           ),
                         ),
                       ),
@@ -141,7 +141,8 @@ class AddMedicine extends ConsumerWidget {
                   Text(
                     "Type",
                     textAlign: TextAlign.left,
-                    style: labelTextStyle,
+                    style: labelTextStyle.copyWith(
+                        color: Theme.of(context).iconTheme.color),
                   ),
                   DropList(
                     currentValue: currentType,
@@ -149,13 +150,15 @@ class AddMedicine extends ConsumerWidget {
                   Gap(gapSize),
                   Text(
                     "Time",
-                    style: labelTextStyle,
+                    style: labelTextStyle.copyWith(
+                        color: Theme.of(context).iconTheme.color),
                   ),
                   Center(child: TimePicker()),
                   Gap(gapSize),
                   Text(
                     "Dose",
-                    style: labelTextStyle,
+                    style: labelTextStyle.copyWith(
+                        color: Theme.of(context).iconTheme.color),
                   ),
                   NameTextField(
                     // must only be a number
@@ -167,7 +170,8 @@ class AddMedicine extends ConsumerWidget {
                   Gap(gapSize),
                   Text(
                     "Number of days",
-                    style: labelTextStyle,
+                    style: labelTextStyle.copyWith(
+                        color: Theme.of(context).iconTheme.color),
                   ),
                   NameTextField(
                     // must only be a number
@@ -191,7 +195,8 @@ class AddMedicine extends ConsumerWidget {
                   Gap(gapSize),
                   Text(
                     "Description",
-                    style: labelTextStyle,
+                    style: labelTextStyle.copyWith(
+                        color: Theme.of(context).iconTheme.color),
                   ),
                   DescriptionField(
                     controller: descriptionController,

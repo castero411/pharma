@@ -22,8 +22,6 @@ Future<void> createEmptyUserDocument({
       'username': username,
       'email': email,
     });
-
-    print("Empty document created for user with UID: $uid");
   } catch (e) {
     print("Error creating empty document in Firestore: $e");
   }

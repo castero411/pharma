@@ -14,13 +14,9 @@ Future<void> deleteMedicine(String medicineName) async {
     // Reference the user's document in Firestore
     final userDocRef = FirebaseFirestore.instance.collection('users').doc(uid);
 
-    try {
-      await userDocRef.update({
-        'medicines.$medicineName': FieldValue.delete(),
-      });
-    } catch (e) {
-      print(e);
-    }
+    await userDocRef.update({
+      'medicines.$medicineName': FieldValue.delete(),
+    });
   } catch (e) {
     print(e);
   }

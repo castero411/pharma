@@ -22,15 +22,15 @@ var lightTheme = ThemeData.light().copyWith(
     headlineMedium: mediumTextStyle,
   ),
   colorScheme: ColorScheme.light().copyWith(
-    primary: xMainColor,
-    onPrimary: xScaffoldColorLight,
-    secondary: xSecondaryColor,
-    onSecondary: xSecondaryColor.withOpacity(.3),
-    
-  ),
+      primary: xMainColor,
+      onPrimary: xScaffoldColorLight,
+      secondary: xSecondaryColor,
+      onSecondary: xSecondaryColor.withOpacity(.3),
+      primaryContainer: xMainColor.withAlpha(10)),
 );
 
 var darkTheme = ThemeData.dark().copyWith(
-  primaryColor: xMainColor,
-  buttonTheme: ButtonThemeData(buttonColor: xMainColor),
-);
+    colorScheme: ColorScheme.dark().copyWith(
+      primary: xMainColorDark,
+    ),
+    primaryColor: xMainColorDark);

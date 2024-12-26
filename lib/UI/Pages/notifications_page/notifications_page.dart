@@ -22,16 +22,6 @@ class NotificationsPage extends ConsumerWidget {
           style: Theme.of(context).textTheme.headlineMedium,
         ),
         centerTitle: true,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back_outlined,
-            color: xLightTextColor,
-            size: 30,
-          ),
-        ),
       ),
       body: SafeArea(
         child: Column(

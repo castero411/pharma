@@ -38,13 +38,13 @@ class SettingsPage extends StatelessWidget {
             //     Navigator.pushNamed(context, 'notifications');
             //   },
             // ),
-            // SettingsTile(
-            //   icon: Ionicons.pencil_sharp,
-            //   title: "Display",
-            //   onTap: () {
-            //     Navigator.pushNamed(context, 'display');
-            //   },
-            // ),
+            SettingsTile(
+              icon: Ionicons.pencil_sharp,
+              title: "Display",
+              onTap: () {
+                Navigator.pushNamed(context, 'display');
+              },
+            ),
             SettingsTile(
               icon: Ionicons.log_out_outline,
               title: "Log out",

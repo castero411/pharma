@@ -70,13 +70,10 @@ class EditAccountPage extends ConsumerWidget {
                 ),
 
                 CustomFormField(
-                    hint: "New Username",
-                    obscure: false,
-                    controller: _newUsernameController),
-
-                Gap(gapSize - 10),
-
-                Gap(gapSize * 2),
+                  hint: "New Username",
+                  obscure: false,
+                  controller: _newUsernameController,
+                ),
               ],
             ),
           ),

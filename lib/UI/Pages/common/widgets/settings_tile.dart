@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medicine_manager/UI/Theme/colors.dart';
 
 class SettingsTile extends StatelessWidget {
   final IconData icon;
@@ -31,7 +30,7 @@ class SettingsTile extends StatelessWidget {
               flex: 1,
               child: Text(
                 title,
-                style: Theme.of(context).textTheme.labelMedium,
+                style: Theme.of(context).textTheme.labelLarge,
               ),
             ),
             Icon(

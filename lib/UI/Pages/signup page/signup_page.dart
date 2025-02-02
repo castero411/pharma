@@ -26,6 +26,7 @@ class SignupPage extends ConsumerWidget {
       final username = usernameController.text;
       final email = emailController.text;
       final password = passwordController.text;
+      final age = ageController.text;
 
       try {
         // Sign up with Firebase Authentication
@@ -38,7 +39,7 @@ class SignupPage extends ConsumerWidget {
         // After successful sign-up, save additional details (like username)
         final user = userCredential.user;
         if (user != null) {
-          createEmptyUserDocument(username: username, email: email);
+          createEmptyUserDocument(username: username, email: email, age: age);
 
           // Navigate to the main page after successful registration
           Navigator.pop(context);

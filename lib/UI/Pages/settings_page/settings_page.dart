@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:medicine_manager/UI/Theme/colors.dart';
 import 'package:medicine_manager/UI/Pages/common/widgets/settings_tile.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -38,13 +37,13 @@ class SettingsPage extends StatelessWidget {
                 Navigator.pushNamed(context, 'notifications');
               },
             ),
-            // SettingsTile(
-            //   icon: Ionicons.pencil_sharp,
-            //   title: "Display",
-            //   onTap: () {
-            //     Navigator.pushNamed(context, 'display');
-            //   },
-            // ),
+            SettingsTile(
+              icon: Ionicons.pencil_sharp,
+              title: "Display",
+              onTap: () {
+                Navigator.pushNamed(context, 'display');
+              },
+            ),
             SettingsTile(
               icon: Ionicons.log_out_outline,
               title: "Log out",

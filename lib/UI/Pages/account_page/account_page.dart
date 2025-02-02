@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:medicine_manager/UI/Pages/common/widgets/wide_button.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    int age = 21;
+
     final userId = FirebaseAuth.instance.currentUser?.uid;
 
     return Scaffold(
@@ -21,6 +24,14 @@ class AccountPage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
+      bottomNavigationBar: Padding(
+          padding:
+              const EdgeInsets.only(left: 100.0, right: 100.0, bottom: 25.0),
+          child: WideButton(
+              title: "Edit Account",
+              onTap: () {
+                Navigator.pushNamed(context, 'edit_account_page');
+              })),
       body: userId == null
           ? Center(
               child: Text(
@@ -106,7 +117,19 @@ class AccountPage extends StatelessWidget {
                         padding:
                             const EdgeInsets.only(bottom: 10.0, left: 10.0),
                         child: Text(
-                          'User ID: $userId',
+                          'Age: $age',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(bottom: 10.0, left: 10.0),
+                        child: Text(
+                          'Gender: Male',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

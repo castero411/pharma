@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
-import 'package:medicine_manager/UI/Theme/colors.dart';
+// import 'package:medicine_manager/UI/Theme/colors.dart';
 import 'package:medicine_manager/models/drug_type.dart';
 
 // ignore: must_be_immutable

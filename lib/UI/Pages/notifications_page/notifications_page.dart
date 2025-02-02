@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:medicine_manager/UI/Pages/common/widgets/switch_tile.dart';
+import 'package:medicine_manager/UI/Pages/notifications_page/permission_handler/permission_handler.dart';
 import '../../Provider/provider.dart';
 import '../../Theme/colors.dart';
 
@@ -30,9 +31,13 @@ class NotificationsPage extends ConsumerWidget {
               icon: Ionicons.notifications_outline,
               title: "Allow Notifications",
               isSwitched: isSwitched,
-              onChanged: (bool value) {
+              onChanged: (bool value) async {
                 // Update the provider's state
                 ref.read(switchProvider.notifier).state = value;
+
+                if (value) {
+                  await requestNotificationPermission();
+                }
               },
             ),
           ],

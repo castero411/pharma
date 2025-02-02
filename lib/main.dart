@@ -7,6 +7,7 @@ import 'package:medicine_manager/UI/Pages/account_page/account_page.dart';
 
 import 'package:medicine_manager/UI/Pages/add_medicine/add_medicine.dart';
 import 'package:medicine_manager/UI/Pages/display_page/display_page.dart';
+import 'package:medicine_manager/UI/Pages/edit_account_page/edit_account_page.dart';
 import 'package:medicine_manager/UI/Pages/login_page/login_page.dart';
 import 'package:medicine_manager/UI/Pages/main_page/main_page.dart';
 import 'package:medicine_manager/UI/Pages/notifications_page/notifications_page.dart';
@@ -69,6 +70,7 @@ class _MedicalAppState extends ConsumerState<MedicalApp> {
             'display': (context) => DisplayPage(),
             'add_medicine': (context) => AddMedicine(),
             'account_page': (context) => AccountPage(),
+            'edit_account_page': (context) => EditAccountPage(),
           },
         );
       },

@@ -24,7 +24,7 @@ class NotificationService {
       channelDescription: 'This is the MedGuard notification channel',
       importance: Importance.max,
       priority: Priority.high,
-      ongoing: true,
+      ongoing: false,
       autoCancel: false,
     );
 

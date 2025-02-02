@@ -23,28 +23,28 @@ class SettingsPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // SettingsTile(
-            //   icon: Ionicons.person_circle_outline,
-            //   title: "Account",
-            //   onTap: () {
-            //     //TODO: create an account page
-            //     Navigator.pushNamed(context, 'account_page');
-            //   },
-            // ),
-            // SettingsTile(
-            //   icon: Ionicons.notifications_outline,
-            //   title: "Notifications",
-            //   onTap: () {
-            //     Navigator.pushNamed(context, 'notifications');
-            //   },
-            // ),
             SettingsTile(
-              icon: Ionicons.pencil_sharp,
-              title: "Display",
+              icon: Ionicons.person_circle_outline,
+              title: "Account",
               onTap: () {
-                Navigator.pushNamed(context, 'display');
+                //TODO: create an account page
+                Navigator.pushNamed(context, 'account_page');
               },
             ),
+            SettingsTile(
+              icon: Ionicons.notifications_outline,
+              title: "Notifications",
+              onTap: () {
+                Navigator.pushNamed(context, 'notifications');
+              },
+            ),
+            // SettingsTile(
+            //   icon: Ionicons.pencil_sharp,
+            //   title: "Display",
+            //   onTap: () {
+            //     Navigator.pushNamed(context, 'display');
+            //   },
+            // ),
             SettingsTile(
               icon: Ionicons.log_out_outline,
               title: "Log out",

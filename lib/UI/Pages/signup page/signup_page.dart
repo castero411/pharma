@@ -1,6 +1,3 @@
-// ignore_for_file: unused_element, avoid_print
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,6 +8,7 @@ import 'package:medicine_manager/UI/Theme/Text_style.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
 import 'package:medicine_manager/firebase/create_user_document.dart';
 import 'package:medicine_manager/functions/validation/email_form_validation.dart';
+import 'package:medicine_manager/functions/validation/medicine_form_validator.dart';
 
 class SignupPage extends ConsumerWidget {
   SignupPage({super.key});
@@ -20,6 +18,7 @@ class SignupPage extends ConsumerWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
+  final TextEditingController ageController = TextEditingController();
 
   Future<void> _signUp(WidgetRef ref, BuildContext context) async {
     if (_formKey.currentState?.validate() ?? false) {
@@ -72,7 +71,7 @@ class SignupPage extends ConsumerWidget {
         padding: EdgeInsets.all(23),
         child: Center(
           child: Form(
-            autovalidateMode: AutovalidateMode.always,
+            autovalidateMode: AutovalidateMode.onUnfocus,
             key: _formKey,
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
@@ -116,6 +115,14 @@ class SignupPage extends ConsumerWidget {
                   Gap(gapSize),
                   CustomFormField(
                     // password text form field
+                    hint: 'age',
+                    obscure: false,
+                    validator: hasNumber,
+                    controller: ageController,
+                  ),
+                  Gap(gapSize),
+                  CustomFormField(
+                    // password text form field
                     hint: 'Password',
                     obscure: true,
                     validator: passwordValidator,
@@ -127,7 +134,6 @@ class SignupPage extends ConsumerWidget {
                     onTap: () => _signUp(ref, context),
                   ),
                   Gap(gapSize * 2),
-                  Divider(),
                 ],
               ),
             ),

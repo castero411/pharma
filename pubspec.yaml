@@ -34,6 +34,8 @@ dependencies:
   weekly_date_picker: ^1.4.2
   calendar_date_picker2: ^1.1.7
   modal_bottom_sheet: ^3.0.0
+  flutter_local_notifications: ^18.0.1
+  permission_handler: ^11.3.1
 
 flutter_native_splash:
   android: true

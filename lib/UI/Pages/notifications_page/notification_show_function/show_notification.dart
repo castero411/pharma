@@ -1,30 +1,42 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
+class NotificationService {
+  static final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
-Future<void> showPersistentNotification() async {
-  const AndroidNotificationDetails androidNotificationDetails =
-      AndroidNotificationDetails(
-    'foreground_service_channel_id',
-    'Foreground Service',
-    channelDescription: 'This is a non-dismissable notification.',
-    importance: Importance.max,
-    priority: Priority.high,
-    ongoing: true,
-    autoCancel: false,
-  );
+  // Singleton instance
+  static final NotificationService _instance = NotificationService._internal();
 
-  const NotificationDetails notificationDetails =
-      NotificationDetails(android: androidNotificationDetails);
+  // Factory constructor returning the singleton instance
+  factory NotificationService() {
+    return _instance;
+  }
 
-  //this is what will be displayed in the notification
-  await flutterLocalNotificationsPlugin.show(
-    0,
-    //this will be the title of the notification itself
-    'Good Man Alert!',
-    //this is the part where the content will be included
-    'There is a good man in the building!',
-    notificationDetails,
-  );
+  // Private named constructor for the singleton pattern
+  NotificationService._internal();
+
+  // Method to show a persistent notification
+  Future<void> showPersistentNotification() async {
+    const AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails(
+      'foreground_service_channel_id',
+      'Foreground Service',
+      channelDescription: 'This is the MedGuard notification channel',
+      importance: Importance.max,
+      priority: Priority.high,
+      ongoing: false,
+      autoCancel: false,
+    );
+
+    const NotificationDetails notificationDetails =
+        NotificationDetails(android: androidNotificationDetails);
+
+    // Display the notification
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      'MedGuard Alert',
+      'Time for your medicine!',
+      notificationDetails,
+    );
+  }
 }

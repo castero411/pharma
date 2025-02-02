@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:medicine_manager/models/medicine.dart';
 
-Future<List<Medicine>> getMedicinesDates() async {
+Future<List<Map<String, dynamic>>> getMedicinesDates() async {
   try {
     // Get the current user's UID
     final user = FirebaseAuth.instance.currentUser;
@@ -21,33 +20,23 @@ Future<List<Medicine>> getMedicinesDates() async {
       return []; // Return an empty list if no data exists
     }
 
-    final medicinesMap = snapshot.data()!['medicines'] as Map<String, dynamic>?;
+    final medicinesMap = snapshot.data()?['medicines'] as Map<String, dynamic>?;
 
     if (medicinesMap == null) {
       return []; // Return an empty list if the medicines map is null
     }
 
-    // Convert the medicines map to a list of Medicine objects
-    final medicines = medicinesMap.entries.map((entry) {
-      return Medicine(
-        name: entry.key,
-        description: entry.value['description'] ?? '',
-        type: entry.value['type'] ?? '',
-        dose: entry.value['dose'] ?? '',
-        doseCount: entry.value['doseCount'] ?? '',
-        startingDate: (entry.value['startingDate'] as Timestamp).toDate(),
-        takenDate: Map<String, bool>.from(entry.value['takenDate'] ?? {}),
-      );
-    }).toList();
-
-    final medicineDate = medicines.map((medicine) {
+    // Extract only name and takenDate
+    final medicineDates = medicinesMap.entries.map((entry) {
       return {
-        "name": medicine.name,
-        "takenDate": medicine.takenDate,
+        "name": entry.key,
+        "takenDate": entry.value['takenDate'] != null
+            ? Map<String, bool>.from(entry.value['takenDate'])
+            : {},
       };
     }).toList();
 
-    return medicines;
+    return medicineDates;
   } catch (e) {
     print("Error retrieving medicines from Firestore: $e");
     return [];

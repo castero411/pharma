@@ -30,7 +30,7 @@ class LoginPage extends ConsumerWidget {
         padding: EdgeInsets.all(23),
         child: Center(
           child: Form(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
+            autovalidateMode: AutovalidateMode.onUnfocus,
             key: _formKey,
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),

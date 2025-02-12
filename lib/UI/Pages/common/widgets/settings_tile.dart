@@ -30,7 +30,7 @@ class SettingsTile extends StatelessWidget {
               flex: 1,
               child: Text(
                 title,
-                style: Theme.of(context).textTheme.labelMedium,
+                style: Theme.of(context).textTheme.labelLarge,
               ),
             ),
             Icon(

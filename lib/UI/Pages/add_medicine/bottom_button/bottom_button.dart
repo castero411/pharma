@@ -18,9 +18,7 @@ class BottomButton extends StatelessWidget {
           child: Center(
             child: Text(
               "Done",
-              style: veryBigTextStyle.copyWith(
-                color: xScaffoldColorLight,
-              ),
+              style: veryBigTextStyle.copyWith(color: Colors.white),
             ),
           ),
         ),

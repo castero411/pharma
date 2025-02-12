@@ -10,12 +10,13 @@ class CustomDatePicker extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return WeeklyDatePicker(
       selectedDigitBackgroundColor: Theme.of(context).primaryColor,
-      selectedDay: ref.watch(dateProvider),
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
       selectedColor: Theme.of(context).primaryColor,
+      selectedDay: ref.watch(dateProvider), // ask about this later
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       enableWeeknumberText: false,
+      digitsColor: Theme.of(context).textTheme.bodyLarge!.color!,
       weekdayTextColor: Theme.of(context).textTheme.bodyLarge!.color!,
-      digitsColor: Theme.of(context).iconTheme.color!,
       changeDay: (selectedDate) {
         ref.read(dateProvider.notifier).state = selectedDate;
       },

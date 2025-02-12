@@ -13,14 +13,14 @@ var lightTheme = ThemeData.light().copyWith(
   iconTheme: IconThemeData(color: xLightTextColor),
   primaryColor: xMainColor,
   buttonTheme: ButtonThemeData(buttonColor: xMainColor),
-  textTheme: TextTheme(
-    titleLarge: bigTextStyle,
-    bodyLarge: veryBigTextStyle,
-    bodySmall: smallTextStyle,
-    labelMedium: smallTextStyle,
-    labelLarge: labelTextStyle,
-    headlineMedium: mediumTextStyle,
-  ),
+  // textTheme: TextTheme(
+  //   titleLarge: bigTextStyle,
+  //   bodyLarge: veryBigTextStyle,
+  //   bodySmall: smallTextStyle,
+  //   labelMedium: smallTextStyle,
+  //   labelLarge: labelTextStyle,
+  //   headlineMedium: mediumTextStyle,
+  // ),
   colorScheme: ColorScheme.light().copyWith(
       primary: xMainColor,
       onPrimary: xScaffoldColorLight,
@@ -30,7 +30,13 @@ var lightTheme = ThemeData.light().copyWith(
 );
 
 var darkTheme = ThemeData.dark().copyWith(
-    colorScheme: ColorScheme.dark().copyWith(
-      primary: xMainColorDark,
-    ),
-    primaryColor: xMainColorDark);
+  colorScheme: ColorScheme.dark().copyWith(
+    primary: xMainColor,
+  ),
+  appBarTheme: AppBarTheme(
+    backgroundColor: Color.fromRGBO(58, 58, 58, 1),
+    titleTextStyle: bigTextStyle.copyWith(color: Colors.white),
+  ),
+  primaryColor: xMainColor,
+  scaffoldBackgroundColor: Color.fromRGBO(58, 58, 58, 1),
+);

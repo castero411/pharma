@@ -9,11 +9,11 @@ import 'package:medicine_manager/UI/Pages/common/widgets/time_picker.dart';
 import 'package:medicine_manager/UI/Provider/medicine_provider.dart';
 import 'package:medicine_manager/UI/Provider/provider.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
-import 'package:medicine_manager/UI/Theme/colors.dart';
 import 'package:medicine_manager/firebase/add_or_update_medicine.dart';
 import 'package:medicine_manager/functions/time/date_to_string.dart';
 import 'package:medicine_manager/functions/time/new_date_with_hours.dart';
 import 'package:medicine_manager/functions/validation/medicine_form_validator.dart';
+import 'package:medicine_manager/models/drug_type.dart';
 import 'package:medicine_manager/models/medicine.dart';
 
 // import 'package:medicine_manager/UI/Provider/add_medicine_providers.dart';
@@ -25,7 +25,6 @@ class AddMedicine extends ConsumerWidget {
   final double gapSize = 50;
 
   final DateTime startingDate = DateTime.now();
-  final String currentType = 'pills';
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
@@ -92,7 +91,7 @@ class AddMedicine extends ConsumerWidget {
               dose: _doseController.text,
               startingDate:
                   editDate(currnetDate, timeOfDay.hour, timeOfDay.minute),
-              type: currentType,
+              type: ref.watch(medicineTypeProvider),
             ));
             ref.watch(medicineProvider.notifier).updateList();
             Navigator.pop(context);
@@ -145,7 +144,8 @@ class AddMedicine extends ConsumerWidget {
                         color: Theme.of(context).iconTheme.color),
                   ),
                   DropList(
-                    currentValue: currentType,
+                    currentProvider: medicineTypeProvider,
+                    listItems: drugType,
                   ),
                   Gap(gapSize),
                   Text(

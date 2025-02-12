@@ -13,7 +13,7 @@ class WideButton extends StatelessWidget {
       width: double.infinity,
       height: 50,
       child: Material(
-        color: xMainColor,
+        color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(10),
         child: InkWell(
           onTap: onTap,

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:medicine_manager/UI/Pages/common/widgets/wide_button.dart';
+import 'package:medicine_manager/UI/Provider/user_data_provider.dart';
 
-class AccountPage extends StatelessWidget {
+class AccountPage extends ConsumerWidget {
   const AccountPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    int age = 21;
+  Widget build(BuildContext context, WidgetRef ref) {
+    Map<String, String> info = ref.watch(userInfoProvider);
 
     final userId = FirebaseAuth.instance.currentUser?.uid;
 
@@ -17,10 +19,6 @@ class AccountPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Account Page",
-          style: TextStyle(
-            fontSize: 24,
-            color: Theme.of(context).primaryColor,
-          ),
         ),
         centerTitle: true,
       ),
@@ -88,17 +86,15 @@ class AccountPage extends StatelessWidget {
                         child: Icon(
                           Ionicons.person_circle_outline,
                           size: 130,
-                          color: Theme.of(context).primaryColor,
                         ),
                       ),
                       Center(
                         child: Text(
                           '$username',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).primaryColor,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium!
+                              .copyWith(fontWeight: FontWeight.bold),
                         ),
                       ),
                       Padding(
@@ -106,35 +102,32 @@ class AccountPage extends StatelessWidget {
                             top: 36.0, bottom: 10.0, left: 10.0),
                         child: Text(
                           'Email: $email',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).primaryColor,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(fontWeight: FontWeight.w600),
                         ),
                       ),
                       Padding(
                         padding:
                             const EdgeInsets.only(bottom: 10.0, left: 10.0),
                         child: Text(
-                          'Age: $age',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).primaryColor,
-                          ),
+                          'Age: ${info["age"]}',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(fontWeight: FontWeight.w600),
                         ),
                       ),
                       Padding(
                         padding:
                             const EdgeInsets.only(bottom: 10.0, left: 10.0),
                         child: Text(
-                          'Gender: Male',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).primaryColor,
-                          ),
+                          'Gender: ${info["gender"]}',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(fontWeight: FontWeight.w600),
                         ),
                       ),
                     ],

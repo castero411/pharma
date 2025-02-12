@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medicine_manager/UI/Provider/provider.dart';
-import 'package:medicine_manager/UI/Theme/colors.dart';
 import 'package:weekly_date_picker/weekly_date_picker.dart';
 
 class CustomDatePicker extends ConsumerWidget {
@@ -12,8 +11,11 @@ class CustomDatePicker extends ConsumerWidget {
     return WeeklyDatePicker(
       selectedDigitBackgroundColor: Theme.of(context).primaryColor,
       selectedDay: ref.watch(dateProvider),
-      backgroundColor: xScaffoldColorLight,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      selectedColor: Theme.of(context).primaryColor,
       enableWeeknumberText: false,
+      weekdayTextColor: Theme.of(context).textTheme.bodyLarge!.color!,
+      digitsColor: Theme.of(context).iconTheme.color!,
       changeDay: (selectedDate) {
         ref.read(dateProvider.notifier).state = selectedDate;
       },

@@ -14,8 +14,8 @@ import 'package:medicine_manager/functions/validation/medicine_form_validator.da
 List<String> genders = ["male", "female"];
 
 // ignore: must_be_immutable
-class EditAccountPage extends ConsumerWidget {
-  EditAccountPage({super.key});
+class InfoPage extends ConsumerWidget {
+  InfoPage({super.key});
 
   final _formKey = GlobalKey<FormState>();
 
@@ -33,28 +33,27 @@ class EditAccountPage extends ConsumerWidget {
           "Account Edit",
           style: TextStyle(
             fontSize: 24,
-            color: Theme.of(context).textTheme.bodyLarge!.color!,
+            color: Theme.of(context).primaryColor,
           ),
         ),
         centerTitle: true,
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(left: 100.0, right: 100.0, bottom: 25.0),
+        padding: const EdgeInsets.only(bottom: 25.0, left: 23, right: 23),
         child: WideButton(
           title: 'Submit',
           onTap: () async {
             // Execute the edit account credentials process when the button is tapped
             if (_formKey.currentState?.validate() ?? false) {
               // Form is valid, perform edit account credentials
-              final newUsername = _newUsernameController.text;
-              editUserInfo(
+              editUserInfoNoName(
                 userId.toString(),
-                newUsername,
                 _ageController.text,
                 ref.watch(genderProvider),
               );
-              await ref.watch(userInfoProvider.notifier).updateInfo();
+              ref.watch(userInfoProvider.notifier).updateInfo();
               Navigator.pop(context);
+              Navigator.pushReplacementNamed(context, 'main_page');
             }
           },
         ),
@@ -70,21 +69,6 @@ class EditAccountPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Logo (you can replace this with an actual logo)
-
-                Padding(
-                  padding: const EdgeInsets.only(top: 25.0, bottom: 50.0),
-                  child: Icon(
-                    Icons.build_rounded,
-                    size: 130,
-                  ),
-                ),
-
-                CustomFormField(
-                  hint: "New Username",
-                  obscure: false,
-                  controller: _newUsernameController,
-                ),
                 Gap(20),
                 CustomFormField(
                   hint: "Age",

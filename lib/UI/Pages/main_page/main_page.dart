@@ -8,6 +8,7 @@ import 'package:medicine_manager/UI/Pages/main_page/medicine_list/medicine_list.
 import 'package:medicine_manager/UI/Provider/medicine_provider.dart';
 import 'package:medicine_manager/UI/Provider/provider.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
+import 'package:medicine_manager/functions/time/number_to_month.dart';
 import 'package:medicine_manager/models/medicine.dart';
 
 class MainPage extends ConsumerWidget {
@@ -67,10 +68,11 @@ class MainPage extends ConsumerWidget {
     ref.watch(medicineProvider.notifier).updateList();
     ref.watch(medicineProvider);
 
+    final currentDay = ref.watch(dateProvider);
+
     return Scaffold(
       appBar: AppBar(
-        surfaceTintColor: Theme.of(context).primaryColor,
-        title: Text("Welcome Back"),
+        title: Text('${numberToMonth(currentDay.month)}   ${currentDay.year}'),
         actions: [
           IconButton(
               onPressed: () {
@@ -85,7 +87,6 @@ class MainPage extends ConsumerWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: xLightTextColor,
         onPressed: () {
           Navigator.pushNamed(context, 'add_medicine');
         },

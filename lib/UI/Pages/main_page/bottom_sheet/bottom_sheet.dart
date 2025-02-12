@@ -114,14 +114,6 @@ class BottomSheetMedicine extends StatelessWidget {
               ),
             ],
           ),
-          Gap(16),
-          RowActionButton(
-            height: 70,
-            onTap: () {},
-            width: double.infinity,
-            iconData: FontAwesomeIcons.penToSquare,
-            text: 'Edit',
-          ),
         ],
       ),
     );

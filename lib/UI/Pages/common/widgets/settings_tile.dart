@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medicine_manager/UI/Theme/colors.dart';
 
 class SettingsTile extends StatelessWidget {
   final IconData icon;

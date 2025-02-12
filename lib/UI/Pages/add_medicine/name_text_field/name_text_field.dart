@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
-import 'package:medicine_manager/UI/Theme/colors.dart';
 
 class NameTextField extends StatelessWidget {
   const NameTextField({
@@ -20,7 +19,6 @@ class NameTextField extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: TextFormField(
-        style: textFieldEntry,
         validator: validator,
         keyboardType: keyboardType,
         controller: controller,

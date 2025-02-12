@@ -51,7 +51,7 @@ android {
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release // Ensure this is correct
+            signingConfig signingConfigs.debug // Ensure this is correct
         }
     }
 }

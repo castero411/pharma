@@ -29,7 +29,7 @@ class MedicineTile extends StatelessWidget {
           height: 70,
           width: double.infinity,
           child: Material(
-            color: taken ? xTakenColor : xContainerColor,
+            color: taken ? xTakenColor : Theme.of(context).hoverColor,
             borderRadius: BorderRadius.circular(10),
             child: InkWell(
               child: Row(

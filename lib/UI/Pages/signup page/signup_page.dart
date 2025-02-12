@@ -1,6 +1,5 @@
 // ignore_for_file: unused_element, avoid_print
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -43,7 +42,7 @@ class SignupPage extends ConsumerWidget {
 
           // Navigate to the main page after successful registration
           Navigator.pop(context);
-          Navigator.pushReplacementNamed(context, 'main_page');
+          Navigator.pushNamed(context, 'info_page');
         }
       } on FirebaseAuthException catch (e) {
         String errorMessage = 'Sign-up failed';

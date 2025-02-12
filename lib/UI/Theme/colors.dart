@@ -13,4 +13,4 @@ var xContainerColor = Color.fromRGBO(215, 224, 227, 1);
 var xTakenColor = Color.fromRGBO(255, 234, 215, 1);
 var xTakenSecondaryColor = Color.fromRGBO(1, 28, 37, 1);
 
-var xMainColorDark = Color.fromRGBO(89, 192, 237, 1);
+var xScaffoldColorDark = Color.fromRGBO(58, 58, 48, 1);

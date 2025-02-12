@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
+import 'package:medicine_manager/UI/Theme/colors.dart';
 
 class BottomButton extends StatelessWidget {
   const BottomButton({super.key, required this.onTap, required this.height});
@@ -18,7 +19,8 @@ class BottomButton extends StatelessWidget {
             child: Text(
               "Done",
               style: veryBigTextStyle.copyWith(
-                  color: Theme.of(context).scaffoldBackgroundColor),
+                color: xScaffoldColorLight,
+              ),
             ),
           ),
         ),

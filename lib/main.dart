@@ -13,8 +13,11 @@ import 'package:medicine_manager/UI/Pages/login_page/login_page.dart';
 import 'package:medicine_manager/UI/Pages/main_page/main_page.dart';
 import 'package:medicine_manager/UI/Pages/notifications_page/notifications_page.dart';
 import 'package:medicine_manager/UI/Pages/settings_page/settings_page.dart';
+import 'package:medicine_manager/UI/Pages/signup%20page/info_page.dart';
 import 'package:medicine_manager/UI/Pages/signup%20page/signup_page.dart';
 import 'package:medicine_manager/UI/Provider/provider.dart';
+import 'package:medicine_manager/UI/Provider/theme_provider.dart';
+import 'package:medicine_manager/UI/Provider/user_data_provider.dart';
 
 import 'package:medicine_manager/UI/Theme/theme.dart';
 
@@ -60,7 +63,10 @@ class _MedicalAppState extends ConsumerState<MedicalApp> {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = ref.watch(displaySwitchProvider);
+    //final isDarkMode = ref.watch(displaySwitchProvider);
+
+    final theme = ref.watch(themeProvider);
+    ref.read(userInfoProvider.notifier).updateInfo();
 
     return Consumer(
       builder: (context, ref, _) {
@@ -71,7 +77,9 @@ class _MedicalAppState extends ConsumerState<MedicalApp> {
 
         // If no user is found, navigate to the login page, otherwise to the main page
         return MaterialApp(
-          theme: isDarkMode ? darkTheme : lightTheme,
+          debugShowCheckedModeBanner: false,
+          //theme: isDarkMode ? darkTheme1 : lightTheme1,
+          theme: appThemes[theme],
           home: user == null ? LoginPage() : MainPage(),
           routes: {
             'login_page': (context) => LoginPage(),
@@ -83,6 +91,7 @@ class _MedicalAppState extends ConsumerState<MedicalApp> {
             'add_medicine': (context) => AddMedicine(),
             'account_page': (context) => AccountPage(),
             'edit_account_page': (context) => EditAccountPage(),
+            'info_page': (context) => InfoPage(),
           },
         );
       },

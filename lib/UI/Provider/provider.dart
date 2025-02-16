@@ -17,3 +17,6 @@ final dateProvider = StateProvider<DateTime>((ref) => DateTime.now());
 final genderProvider = StateProvider<String>((ref) => 'male');
 
 final medicineTypeProvider = StateProvider<String>((ref) => 'pills');
+
+final hoursMethodProvider =
+    StateProvider<bool>((ref) => false); //fasle = days, true = hours

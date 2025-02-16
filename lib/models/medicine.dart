@@ -7,7 +7,7 @@ class Medicine {
   final String dose;
   final String doseCount;
   final DateTime startingDate;
-  final Map<String, bool> takenDate;
+  final Map<String, Map<String, bool>> takenDate;
 
   Medicine({
     required this.type,
@@ -42,7 +42,13 @@ class Medicine {
       doseCount: data["doseCount"] ?? '',
       startingDate:
           (data['startingDate'] as Timestamp?)?.toDate() ?? DateTime.now(),
-      takenDate: Map<String, bool>.from(data['takenDate'] ?? {}),
+      takenDate: (data['takenDate'] as Map<String, dynamic>?)?.map(
+            (key, value) => MapEntry(
+              key,
+              Map<String, bool>.from(value),
+            ),
+          ) ??
+          {},
     );
   }
 }

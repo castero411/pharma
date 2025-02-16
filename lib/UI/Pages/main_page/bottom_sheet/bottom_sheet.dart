@@ -14,9 +14,13 @@ import 'package:medicine_manager/models/medicine.dart';
 
 class BottomSheetMedicine extends StatelessWidget {
   const BottomSheetMedicine(
-      {super.key, required this.medicine, required this.ref});
+      {super.key,
+      required this.medicine,
+      required this.ref,
+      required this.time});
   final WidgetRef ref;
   final Medicine medicine;
+  final String time;
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +107,7 @@ class BottomSheetMedicine extends StatelessWidget {
               Expanded(
                 child: ColumnActionButton(
                   onTap: () async {
-                    await updateMedicineState(medicine.name, date);
+                    await updateMedicineState(medicine.name, date, time);
                     ref.read(medicineProvider);
                   },
                   width: double.infinity,

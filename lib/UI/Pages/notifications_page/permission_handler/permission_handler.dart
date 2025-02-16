@@ -13,7 +13,8 @@ Future<bool> requestNotificationPermission() async {
 //this condition will check if the access is granted or not
   if (status.isGranted) {
     // showPersistentNotification();
-    notificationService.showPersistentNotification();
+    //notificationService.showPersistentNotification(
+    //   title: 'acess granted', body: '');
   } else if (status.isPermanentlyDenied) {
     // if the user permanently denies permission, guide them to the app settings
     openAppSettings();

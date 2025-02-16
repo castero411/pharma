@@ -5,16 +5,16 @@ import 'package:medicine_manager/UI/Pages/add_medicine/bottom_button/bottom_butt
 import 'package:medicine_manager/UI/Pages/add_medicine/description_field/description_field.dart';
 import 'package:medicine_manager/UI/Pages/add_medicine/drop_list/drop_list.dart';
 import 'package:medicine_manager/UI/Pages/add_medicine/name_text_field/name_text_field.dart';
+import 'package:medicine_manager/UI/Pages/add_medicine/options_bar/options_bar.dart';
 import 'package:medicine_manager/UI/Pages/common/widgets/time_picker.dart';
 import 'package:medicine_manager/UI/Provider/medicine_provider.dart';
 import 'package:medicine_manager/UI/Provider/provider.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
 import 'package:medicine_manager/firebase/add_or_update_medicine.dart';
-import 'package:medicine_manager/functions/time/date_to_string.dart';
+import 'package:medicine_manager/functions/medicines/create_new_medicine.dart';
 import 'package:medicine_manager/functions/time/new_date_with_hours.dart';
 import 'package:medicine_manager/functions/validation/medicine_form_validator.dart';
 import 'package:medicine_manager/models/drug_type.dart';
-import 'package:medicine_manager/models/medicine.dart';
 
 // import 'package:medicine_manager/UI/Provider/add_medicine_providers.dart';
 // import 'package:medicine_manager/UI/Pages/add_medicine/week_list/week_list.dart';
@@ -22,7 +22,7 @@ import 'package:medicine_manager/models/medicine.dart';
 class AddMedicine extends ConsumerWidget {
   AddMedicine({super.key});
 
-  final double gapSize = 50;
+  final double gapSize = 30;
 
   final DateTime startingDate = DateTime.now();
 
@@ -31,44 +31,12 @@ class AddMedicine extends ConsumerWidget {
   final TextEditingController _doseCountController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   final TextEditingController _doseController = TextEditingController();
-
-  Medicine createMedicineWithTakenDates({
-    required String name,
-    required String description,
-    required String type,
-    required String dose,
-    required String doseNumber,
-    required DateTime startingDate,
-  }) {
-    // Parse dose to an integer
-    final int doseCount =
-        int.tryParse(doseNumber) ?? 0; // Use 0 if parsing fails
-    if (doseCount <= 0) {
-      throw ArgumentError("Dose must be a positive integer.");
-    }
-
-    // Initialize takenDate map
-    final Map<String, bool> initializedTakenDates = {};
-    for (int i = 0; i < doseCount; i++) {
-      DateTime date = startingDate.add(Duration(days: i));
-      String formattedDate = formatDate(date);
-      initializedTakenDates[formattedDate] = false;
-    }
-
-    // Return the Medicine instance
-    return Medicine(
-      name: name,
-      description: description,
-      type: type,
-      dose: dose,
-      doseCount: doseNumber,
-      startingDate: startingDate,
-      takenDate: initializedTakenDates,
-    );
-  }
+  final TextEditingController _hoursCountController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool useHours = ref.watch(hoursMethodProvider);
+
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Theme.of(context).primaryColor,
@@ -84,17 +52,31 @@ class AddMedicine extends ConsumerWidget {
           TimeOfDay timeOfDay = ref.watch(timeProvider);
 
           if (_globalKey.currentState!.validate()) {
-            await addOrUpdateMedicine(createMedicineWithTakenDates(
-              doseNumber: _doseCountController.text,
-              description: descriptionController.text,
-              name: nameController.text,
-              dose: _doseController.text,
-              startingDate:
-                  editDate(currnetDate, timeOfDay.hour, timeOfDay.minute),
-              type: ref.watch(medicineTypeProvider),
-            ));
-            ref.watch(medicineProvider.notifier).updateList();
-            Navigator.pop(context);
+            if (useHours) {
+              await addOrUpdateMedicine(createMedicineWithTakenHours(
+                  doseNumber: _doseCountController.text,
+                  description: descriptionController.text,
+                  name: nameController.text,
+                  dose: _doseController.text,
+                  startingDate:
+                      editDate(currnetDate, timeOfDay.hour, timeOfDay.minute),
+                  type: ref.watch(medicineTypeProvider),
+                  hours: _hoursCountController.text));
+              ref.watch(medicineProvider.notifier).updateList();
+              Navigator.pop(context);
+            } else {
+              await addOrUpdateMedicine(createMedicineWithTakenDates(
+                doseNumber: _doseCountController.text,
+                description: descriptionController.text,
+                name: nameController.text,
+                dose: _doseController.text,
+                startingDate:
+                    editDate(currnetDate, timeOfDay.hour, timeOfDay.minute),
+                type: ref.watch(medicineTypeProvider),
+              ));
+              ref.watch(medicineProvider.notifier).updateList();
+              Navigator.pop(context);
+            }
           }
         },
         height: 64,
@@ -167,18 +149,72 @@ class AddMedicine extends ConsumerWidget {
                     validator: nameValidator,
                     keyboardType: TextInputType.text,
                   ),
-                  Gap(gapSize),
-                  Text(
-                    "Number of days",
-                    style: labelTextStyle.copyWith(
-                        color: Theme.of(context).iconTheme.color),
+                  Gap(20),
+
+                  OptionsBar(),
+                  Gap(20),
+
+                  Visibility(
+                    visible: !useHours,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          width: double.infinity,
+                          child: Text(
+                            "Number of days",
+                            style: labelTextStyle.copyWith(
+                                color: Theme.of(context).iconTheme.color),
+                          ),
+                        ),
+                        NameTextField(
+                          // must only be a number
+                          controller: _doseCountController,
+                          text: "",
+                          validator: hasNumber,
+                          keyboardType: TextInputType.number,
+                        ),
+                        Gap(gapSize),
+                      ],
+                    ),
                   ),
-                  NameTextField(
-                    // must only be a number
-                    controller: _doseCountController,
-                    text: "",
-                    validator: hasNumber,
-                    keyboardType: TextInputType.number,
+                  Visibility(
+                    visible: useHours,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          width: double.infinity,
+                          child: Text(
+                            "Number of doses",
+                            style: labelTextStyle.copyWith(
+                                color: Theme.of(context).iconTheme.color),
+                          ),
+                        ),
+                        NameTextField(
+                          // must only be a number
+                          controller: _doseCountController,
+                          text: "",
+                          validator: hasNumber,
+                          keyboardType: TextInputType.number,
+                        ),
+                        Gap(gapSize),
+                        SizedBox(
+                          width: double.infinity,
+                          child: Text(
+                            "Hours gap",
+                            style: labelTextStyle.copyWith(
+                                color: Theme.of(context).iconTheme.color),
+                          ),
+                        ),
+                        NameTextField(
+                          // must only be a number
+                          controller: _hoursCountController,
+                          text: "",
+                          validator: hasNumber,
+                          keyboardType: TextInputType.number,
+                        ),
+                        Gap(gapSize),
+                      ],
+                    ),
                   ),
 
                   // Gap(gapSize),
@@ -192,7 +228,6 @@ class AddMedicine extends ConsumerWidget {
                   //     currentWeek: daysOfTheWeek,
                   //   ),
                   // ),
-                  Gap(gapSize),
                   Text(
                     "Description",
                     style: labelTextStyle.copyWith(

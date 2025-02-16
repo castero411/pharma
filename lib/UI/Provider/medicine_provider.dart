@@ -8,7 +8,7 @@ class CurrentMedicineNotifier extends StateNotifier<List<Medicine>> {
 
   void updateList() async {
     state = await getMedicines();
-    _notifyIfMedicineDue(); // Check if any medicine is due after updating the list
+    //_notifyIfMedicineDue(); // Check if any medicine is due after updating the list
   }
 
   List<Medicine> getMedicinesOfTheDay(String date) {
@@ -17,17 +17,27 @@ class CurrentMedicineNotifier extends StateNotifier<List<Medicine>> {
         .toList();
   }
 
-  // Function to check if any medicine is due and trigger a notification
+  //Function to check if any medicine is due and trigger a notification
   void _notifyIfMedicineDue() {
     DateTime now = DateTime.now();
     String todayStr =
         "${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
+    String currentTimeStr =
+        "${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}";
+
+    final notificationService = NotificationService(); // Singleton instance
 
     for (var medicine in state) {
-      if (medicine.takenDate.containsKey(todayStr) &&
-          !medicine.takenDate[todayStr]!) {
-        NotificationService()
-            .showPersistentNotification(); // Accessing the singleton instance
+      // Check if today's date is in the takenDate map
+      if (medicine.takenDate.containsKey(todayStr)) {
+        // Check if any time for today is not marked as taken
+        bool isDue =
+            medicine.takenDate[todayStr]!.values.any((taken) => !taken);
+
+        if (isDue) {
+          //notificationService.showPersistentNotification(title: '', body: '');
+          break; // Exit the loop to prevent multiple notifications
+        }
       }
     }
   }

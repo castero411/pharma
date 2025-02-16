@@ -51,7 +51,7 @@ class MainPage extends ConsumerWidget {
   }
 
   void showBottomSheet(
-      BuildContext context, Medicine currentMed, WidgetRef ref) {
+      BuildContext context, Medicine currentMed, WidgetRef ref, String time) {
     showModalBottomSheet(
         context: context,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -59,6 +59,7 @@ class MainPage extends ConsumerWidget {
           return BottomSheetMedicine(
             medicine: currentMed,
             ref: ref,
+            time: time,
           );
         });
   }
@@ -112,7 +113,7 @@ class MainPage extends ConsumerWidget {
               child: MedicineList(
                 takeMedicine: (medicine) {},
                 onHold: (medicine) {
-                  showBottomSheet(context, medicine, ref);
+                  //showBottomSheet(context, medicine, ref);
                 },
               ),
             ),

@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:medicine_manager/UI/Pages/common/widgets/switch_tile.dart';
 import 'package:medicine_manager/UI/Pages/notifications_page/permission_handler/permission_handler.dart';
+import 'package:medicine_manager/UI/Provider/medicine_provider.dart';
+import '../../../functions/notifications/schedule_notifications.dart';
 import '../../Provider/provider.dart';
 
 class NotificationsPage extends ConsumerWidget {
@@ -32,10 +34,14 @@ class NotificationsPage extends ConsumerWidget {
               isSwitched: isSwitched,
               onChanged: (bool value) async {
                 // Update the provider's state
-                ref.read(switchProvider.notifier).state = value;
+                try {
+                  ref.read(switchProvider.notifier).state = value;
 
-                if (value) {
-                  await requestNotificationPermission();
+                  if (value) {
+                    await requestNotificationPermission(ref);
+                  }
+                } catch (e) {
+                  print("Error during permission request!");
                 }
               },
             ),

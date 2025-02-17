@@ -25,3 +25,29 @@ Future<void> scheduleNotification(
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setString('notification_$id', scheduledTime.toIso8601String());
 }
+
+Future<void> showNotification(int id, String medicineName) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? scheduledTimeString = prefs.getString('notification_$id');
+
+  if (scheduledTimeString != null) {
+    DateTime scheduledTime = DateTime.parse(scheduledTimeString);
+
+    await flutterLocalNotificationsPlugin.show(
+      id,
+      'time for your medicine',
+      'you have ${medicineName} to take now',
+      NotificationDetails(
+        android: AndroidNotificationDetails(
+          'channel_id',
+          'channel_name',
+          importance: Importance.max,
+          priority: Priority.high,
+        ),
+      ),
+    );
+  } else {
+    // Handle case where there is no scheduled notification for this ID.
+    print("No scheduled notification found for ID: $id");
+  }
+}

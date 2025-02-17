@@ -16,6 +16,7 @@ void checkForScheduleNotifications(List<Medicine> medicineList) async {
                 "time for your medicine",
                 "you have ${medicine.name} to take now",
                 parseTime(entry.key, entryX.key));
+            await showNotification(id, medicine.name);
           }
         }
       }

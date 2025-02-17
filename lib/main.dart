@@ -15,9 +15,13 @@ import 'package:medicine_manager/UI/Pages/notifications_page/notifications_page.
 import 'package:medicine_manager/UI/Pages/settings_page/settings_page.dart';
 import 'package:medicine_manager/UI/Pages/signup%20page/info_page.dart';
 import 'package:medicine_manager/UI/Pages/signup%20page/signup_page.dart';
-import 'package:medicine_manager/UI/Provider/provider.dart';
+import 'package:medicine_manager/UI/Provider/medicine_provider.dart';
+
 import 'package:medicine_manager/UI/Provider/theme_provider.dart';
 import 'package:medicine_manager/UI/Provider/user_data_provider.dart';
+import 'package:medicine_manager/functions/notifications/schedule_notifications.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 import 'package:medicine_manager/UI/Theme/theme.dart';
 
@@ -36,6 +40,10 @@ void main() async {
   final InitializationSettings initializationSettings =
       InitializationSettings(android: initializationSettingsAndroid);
   await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
+  // Initialize time zone data
+  tz.initializeTimeZones();
+  tz.setLocalLocation(tz.getLocation('Africa/Cairo'));
 
   runApp(ProviderScope(child: const MedicalApp()));
 }
@@ -56,7 +64,6 @@ class _MedicalAppState extends ConsumerState<MedicalApp> {
 
   Future<void> _initializeApp() async {
     // Pausing for splash screen
-
     await Future.delayed(const Duration(seconds: 3));
     FlutterNativeSplash.remove();
   }
@@ -86,12 +93,12 @@ class _MedicalAppState extends ConsumerState<MedicalApp> {
             'signup_page': (context) => SignupPage(),
             'main_page': (context) => MainPage(),
             'settings': (context) => SettingsPage(),
-            'notifications': (context) => NotificationsPage(),
             'display': (context) => DisplayPage(),
             'add_medicine': (context) => AddMedicine(),
             'account_page': (context) => AccountPage(),
             'edit_account_page': (context) => EditAccountPage(),
             'info_page': (context) => InfoPage(),
+            'notifications': (context) => NotificationsPage()
           },
         );
       },

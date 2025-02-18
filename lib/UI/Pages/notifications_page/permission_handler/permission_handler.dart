@@ -10,27 +10,28 @@ import 'package:permission_handler/permission_handler.dart';
 //this function will check if the system itself did allow notifications or not
 Future<bool> requestNotificationPermission(WidgetRef ref) async {
   try {
-    // Log permission request start
     print("Requesting notification permission...");
 
-    // Request permission
     var status = await Permission.notification.request();
     print("Notification Permission status: $status");
 
-    // If permission is granted
     if (status.isGranted) {
       print("Permission granted!");
 
       try {
-        final List<Medicine> medicineList =
-            ref.read(medicineProvider); // Get medicine list
-        print("Medicine list retrieved: $medicineList");
+        final List<Medicine> medicineList = ref.read(medicineProvider);
+        print("Medicine list retrieved: ${medicineList.length} medicines");
+
+        if (medicineList.isEmpty) {
+          print("No medicines found, skipping scheduling.");
+          return true;
+        }
 
         final NotificationService notificationService = NotificationService();
         print("NotificationService created");
 
-        // Call to check for scheduled notifications
-        checkForScheduleNotifications(medicineList);
+        // Make sure checkForScheduleNotifications is a Future<void> function
+        await checkForScheduleNotifications(medicineList);
         print("Checked for scheduled notifications");
 
         return true;

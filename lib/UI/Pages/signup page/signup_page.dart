@@ -8,7 +8,6 @@ import 'package:medicine_manager/UI/Theme/Text_style.dart';
 import 'package:medicine_manager/UI/Theme/colors.dart';
 import 'package:medicine_manager/firebase/create_user_document.dart';
 import 'package:medicine_manager/functions/validation/email_form_validation.dart';
-import 'package:medicine_manager/functions/validation/medicine_form_validator.dart';
 
 class SignupPage extends ConsumerWidget {
   SignupPage({super.key});
@@ -18,7 +17,6 @@ class SignupPage extends ConsumerWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
-  final TextEditingController ageController = TextEditingController();
 
   Future<void> _signUp(WidgetRef ref, BuildContext context) async {
     if (_formKey.currentState?.validate() ?? false) {
@@ -26,7 +24,6 @@ class SignupPage extends ConsumerWidget {
       final username = usernameController.text;
       final email = emailController.text;
       final password = passwordController.text;
-      final age = ageController.text;
 
       try {
         // Sign up with Firebase Authentication
@@ -39,7 +36,10 @@ class SignupPage extends ConsumerWidget {
         // After successful sign-up, save additional details (like username)
         final user = userCredential.user;
         if (user != null) {
-          createEmptyUserDocument(username: username, email: email, age: age);
+          createEmptyUserDocument(
+            username: username,
+            email: email,
+          );
 
           // Navigate to the main page after successful registration
           Navigator.pop(context);
@@ -81,7 +81,7 @@ class SignupPage extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Medi Guard',
+                    'Mediguard',
                     style: TextStyle(
                         color: xMainColor,
                         fontSize: 50,
@@ -112,14 +112,6 @@ class SignupPage extends ConsumerWidget {
                     obscure: false,
                     validator: emailValidator,
                     controller: emailController,
-                  ),
-                  Gap(gapSize),
-                  CustomFormField(
-                    // password text form field
-                    hint: 'age',
-                    obscure: false,
-                    validator: hasNumber,
-                    controller: ageController,
                   ),
                   Gap(gapSize),
                   CustomFormField(

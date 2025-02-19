@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-Future<void> createEmptyUserDocument(
-    {required String username,
-    required String email,
-    required String age}) async {
+Future<void> createEmptyUserDocument({
+  required String username,
+  required String email,
+}) async {
   try {
     // Get the current user's UID
     final user = FirebaseAuth.instance.currentUser;
@@ -21,7 +21,6 @@ Future<void> createEmptyUserDocument(
       'uid': uid,
       'username': username,
       'email': email,
-      'age': age,
     });
   } catch (e) {
     print("Error creating empty document in Firestore: $e");

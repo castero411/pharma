@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:medicine_manager/functions/alarm/create_alarm.dart';
 import 'package:medicine_manager/functions/time/date_to_string.dart';
 import 'package:medicine_manager/functions/time/time_to_string.dart';
 import 'package:medicine_manager/models/medicine.dart';
-import 'package:medicine_manager/models/notification_model.dart';
 
 Medicine createMedicineWithTakenDates({
   required String name,
@@ -32,7 +30,7 @@ Medicine createMedicineWithTakenDates({
       initializedTakenDates[formattedDate] = {};
     }
     initializedTakenDates[formattedDate]![time] = false;
-    createAlarm(name, date);
+    createAlarm(name, formattedDate, time, date);
   }
 
   // Return the Medicine instance
@@ -83,7 +81,7 @@ Medicine createMedicineWithTakenHours({
     // Efficiently initialize nested map
     initializedTakenDates.putIfAbsent(formattedDate, () => {});
     initializedTakenDates[formattedDate]![time] = false;
-    createAlarm(name, date);
+    createAlarm(name, formattedDate, time, date);
   }
 
   // Return the Medicine instance

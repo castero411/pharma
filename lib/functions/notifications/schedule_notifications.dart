@@ -20,7 +20,7 @@ Future<bool> checkNotificationWithId(int id) async {
   return scheduledDateTime.isAfter(DateTime.now());
 }
 
-int generateId(String name, DateTime dateTime) {
-  String combined = "$name${dateTime.toIso8601String()}";
+int generateId(String name, String date, String time) {
+  String combined = "$name$date$time}";
   return combined.hashCode.abs();
 }

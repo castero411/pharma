@@ -42,14 +42,14 @@ flutter_native_splash:
   android: true
   ios: true
   web: false
-  color: "#154FE3"
-  color_dark: "#154FE3"
-  image: "assets/logo.jpg"
+  color: "#FFFDF1"
+  color_dark: "#FFFDF1"
+  image: "assets/logo.png"
 
   android_12:
-    color: "#084059"
-    color_dark: "#084059"
-    image: "assets/logo.jpg"
+    color: "#FFFDF1"
+    color_dark: "#FFFDF1"
+    image: "assets/logo.png"
 
 
 dev_dependencies:

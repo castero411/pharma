@@ -81,7 +81,7 @@ class SignupPage extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'MedGuard',
+                    'Medi Guard',
                     style: TextStyle(
                         color: xMainColor,
                         fontSize: 50,

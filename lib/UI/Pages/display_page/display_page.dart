@@ -1,11 +1,7 @@
 // notifications_page.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:medicine_manager/UI/Pages/add_medicine/drop_list/drop_list.dart';
-import 'package:medicine_manager/UI/Pages/common/widgets/switch_tile.dart';
 import 'package:medicine_manager/UI/Provider/theme_provider.dart';
-import '../../Provider/provider.dart';
 
 class DisplayPage extends ConsumerWidget {
   // Change to ConsumerWidget

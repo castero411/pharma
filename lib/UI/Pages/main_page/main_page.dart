@@ -7,8 +7,6 @@ import 'package:medicine_manager/UI/Pages/main_page/date_picker/date_picker.dart
 import 'package:medicine_manager/UI/Pages/main_page/medicine_list/medicine_list.dart';
 import 'package:medicine_manager/UI/Provider/medicine_provider.dart';
 import 'package:medicine_manager/UI/Provider/provider.dart';
-import 'package:medicine_manager/functions/notifications/schedule_notifications.dart';
-
 import 'package:medicine_manager/functions/time/number_to_month.dart';
 import 'package:medicine_manager/models/medicine.dart';
 

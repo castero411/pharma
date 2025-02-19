@@ -12,7 +12,6 @@ import 'package:medicine_manager/UI/Provider/provider.dart';
 import 'package:medicine_manager/UI/Theme/Text_style.dart';
 import 'package:medicine_manager/firebase/add_or_update_medicine.dart';
 import 'package:medicine_manager/functions/medicines/create_new_medicine.dart';
-import 'package:medicine_manager/functions/notifications/schedule_notifications.dart';
 import 'package:medicine_manager/functions/time/new_date_with_hours.dart';
 import 'package:medicine_manager/functions/validation/medicine_form_validator.dart';
 import 'package:medicine_manager/models/drug_type.dart';

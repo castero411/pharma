@@ -27,7 +27,7 @@ class MainPage extends ConsumerWidget {
   void showDatePicker(BuildContext context, WidgetRef ref) async {
     final currentDay = ref.watch(dateProvider);
 
-    checkForScheduleNotifications(ref.read(medicineProvider));
+    //checkForScheduleNotifications(ref.read(medicineProvider));
 
     showDialog(
       context: context,

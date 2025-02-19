@@ -1,28 +1,6 @@
-import 'package:medicine_manager/functions/notifications/add_notifications.dart';
 import 'package:medicine_manager/models/medicine.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-Future<void> checkForScheduleNotifications(List<Medicine> medicineList) async {
-  for (Medicine medicine in medicineList) {
-    for (var entry in medicine.takenDate.entries) {
-      for (var entryX in entry.value.entries) {
-        if (!entryX.value) {
-          int id = generateId(entry.key, entryX.key, medicine.name);
-          if (!await checkNotificationWithId(id) ||
-              !(isNotInTheFuture(parseTime(entry.key, entryX.key)))) {
-            await scheduleNotification(
-                id,
-                "time for your medicine",
-                "you have ${medicine.name} to take now",
-                parseTime(entry.key, entryX.key));
-            await showNotification(id, medicine.name);
-          }
-        }
-      }
-    }
-  }
-}
 
 bool isNotInTheFuture(DateTime date) {
   return date.isBefore(DateTime.now()) || date.isAtSameMomentAs(DateTime.now());
@@ -43,9 +21,7 @@ Future<bool> checkNotificationWithId(int id) async {
   return scheduledDateTime.isAfter(DateTime.now());
 }
 
-int generateId(String date, String time, String name) {
-  // Combine date, time, and name into one unique string
-  String combined = "$date$time$name";
-  // Generate a hash code and ensure it's positive
+int generateId(String name, DateTime dateTime) {
+  String combined = "$name${dateTime.toIso8601String()}";
   return combined.hashCode.abs();
 }

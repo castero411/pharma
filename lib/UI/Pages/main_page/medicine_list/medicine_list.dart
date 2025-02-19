@@ -46,7 +46,7 @@ class MedicineList extends ConsumerWidget {
           onTapIcon: () async {
             takeMedicine(loopedMeds[item].medicine);
             await updateMedicineState(
-                currentMedicines[item].name, formatedDate, time);
+                loopedMeds[item].medicine.name, formatedDate, time);
             ref.read(medicineProvider);
           },
           onTapBody: () {

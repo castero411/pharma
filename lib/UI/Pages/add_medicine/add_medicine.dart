@@ -76,7 +76,7 @@ class AddMedicine extends ConsumerWidget {
                 type: ref.watch(medicineTypeProvider),
               ));
               ref.watch(medicineProvider.notifier).updateList();
-              checkForScheduleNotifications(ref.read(medicineProvider));
+              //checkForScheduleNotifications(ref.read(medicineProvider));
 
               Navigator.pop(context);
             }
@@ -212,7 +212,7 @@ class AddMedicine extends ConsumerWidget {
                           // must only be a number
                           controller: _hoursCountController,
                           text: "",
-                          validator: hasNumber,
+                          validator: hasDecimalNumber,
                           keyboardType: TextInputType.number,
                         ),
                         Gap(gapSize),

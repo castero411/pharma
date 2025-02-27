@@ -168,6 +168,12 @@ class AddMedicine extends ConsumerWidget {
                                 color: Theme.of(context).iconTheme.color),
                           ),
                         ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: Text(
+                            "The number of days the medicine will be taken",
+                          ),
+                        ),
                         NameTextField(
                           // must only be a number
                           controller: _doseCountController,
@@ -191,6 +197,13 @@ class AddMedicine extends ConsumerWidget {
                                 color: Theme.of(context).iconTheme.color),
                           ),
                         ),
+                        SizedBox(
+                          // number of dose description
+                          width: double.infinity,
+                          child: Text(
+                            "The number of doses to be taken in the future",
+                          ),
+                        ),
                         NameTextField(
                           // must only be a number
                           controller: _doseCountController,
@@ -205,6 +218,13 @@ class AddMedicine extends ConsumerWidget {
                             "Interval",
                             style: labelTextStyle.copyWith(
                                 color: Theme.of(context).iconTheme.color),
+                          ),
+                        ),
+                        SizedBox(
+                          // intervals description
+                          width: double.infinity,
+                          child: Text(
+                            "Number of hours interval between each medicine",
                           ),
                         ),
                         NameTextField(

@@ -27,11 +27,19 @@ final alarmSettings = AlarmSettings(
 );
 
 Future<void> createAlarm(String medicineName, String date, String time,
-    DateTime medicineTime) async {
+    String description, DateTime medicineTime) async {
   if (medicineTime.isAfter(DateTime.now())) {
     await Alarm.set(
         alarmSettings: alarmSettings.copyWith(
-            dateTime: medicineTime, id: generateId(medicineName, date, time)));
+      dateTime: medicineTime,
+      id: generateId(medicineName, date, time),
+      notificationSettings: NotificationSettings(
+        title: 'Time for $medicineName',
+        body: description,
+        stopButton: 'Stop the alarm',
+        icon: 'notification_icon',
+      ),
+    ));
   }
 }
 

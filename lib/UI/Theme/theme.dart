@@ -11,7 +11,7 @@ final appThemes = {
   AppTheme.light3: lightTheme3
 };
 
-var lightTheme1 = ThemeData.light().copyWith(
+var lightTheme3 = ThemeData.light().copyWith(
   scaffoldBackgroundColor: xScaffoldColorLight,
   indicatorColor: xLightTextColor,
   appBarTheme: AppBarTheme(
@@ -84,7 +84,7 @@ var darkTheme2 = ThemeData.dark().copyWith(
   scaffoldBackgroundColor: xScaffoldColorDark,
 );
 
-var lightTheme3 = ThemeData.light().copyWith(
+var lightTheme1 = ThemeData.light().copyWith(
     appBarTheme: AppBarTheme(
       backgroundColor: Color.fromRGBO(255, 253, 241, 1),
       titleTextStyle: bigTextStyle,

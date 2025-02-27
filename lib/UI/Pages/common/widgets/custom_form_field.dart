@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medicine_manager/UI/Theme/colors.dart';
 
 class CustomFormField extends StatelessWidget {
   final String hint;

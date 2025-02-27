@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medicine_manager/UI/Theme/Text_style.dart';
 
 class NameTextField extends StatelessWidget {
   const NameTextField({

@@ -202,7 +202,7 @@ class AddMedicine extends ConsumerWidget {
                         SizedBox(
                           width: double.infinity,
                           child: Text(
-                            "Hours gap",
+                            "Interval",
                             style: labelTextStyle.copyWith(
                                 color: Theme.of(context).iconTheme.color),
                           ),

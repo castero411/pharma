@@ -30,7 +30,7 @@ Medicine createMedicineWithTakenDates({
       initializedTakenDates[formattedDate] = {};
     }
     initializedTakenDates[formattedDate]![time] = false;
-    createAlarm(name, formattedDate, time, date);
+    createAlarm(name, formattedDate, time, description, date);
   }
 
   // Return the Medicine instance
@@ -81,7 +81,7 @@ Medicine createMedicineWithTakenHours({
     // Efficiently initialize nested map
     initializedTakenDates.putIfAbsent(formattedDate, () => {});
     initializedTakenDates[formattedDate]![time] = false;
-    createAlarm(name, formattedDate, time, date);
+    createAlarm(name, formattedDate, time, description, date);
   }
 
   // Return the Medicine instance

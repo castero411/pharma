@@ -87,12 +87,13 @@ class AddMedicine extends ConsumerWidget {
         child: Form(
           key: _globalKey,
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Gap(20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -258,6 +259,7 @@ class AddMedicine extends ConsumerWidget {
                   DescriptionField(
                     controller: descriptionController,
                   ),
+                  Gap(20),
                 ],
               ),
             ),

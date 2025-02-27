@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 var xMainColor = Color.fromRGBO(8, 64, 89, 1);
 
-var xSecondaryColor = Color.fromRGBO(255, 250, 247, 1);
+var xSecondaryColor = Color.fromRGBO(255, 234, 215, 1);
 var xScaffoldColorLight = Color.fromRGBO(255, 250, 247, 1);
 var xLightButtonColor = Color.fromRGBO(255, 239, 227, 1);
 var xHintColor = Color.fromARGB(255, 139, 139, 139);

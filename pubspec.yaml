@@ -34,22 +34,22 @@ dependencies:
   weekly_date_picker: ^1.4.2
   calendar_date_picker2: ^1.1.7
   modal_bottom_sheet: ^3.0.0
-  flutter_local_notifications: ^18.0.1
   permission_handler: ^11.3.1
   timezone: ^0.10.0
+  alarm: ^5.0.2
 
 flutter_native_splash:
   android: true
   ios: true
   web: false
-  color: "#154FE3"
-  color_dark: "#154FE3"
-  image: "assets/logo.jpg"
+  color: "#FFFDF1"
+  color_dark: "#FFFDF1"
+  image: "assets/logo.png"
 
   android_12:
-    color: "#084059"
-    color_dark: "#084059"
-    image: "assets/logo.jpg"
+    color: "#FFFDF1"
+    color_dark: "#FFFDF1"
+    image: "assets/logo.png"
 
 
 dev_dependencies:

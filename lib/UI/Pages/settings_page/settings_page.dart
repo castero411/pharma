@@ -30,13 +30,13 @@ class SettingsPage extends StatelessWidget {
                 Navigator.pushNamed(context, 'account_page');
               },
             ),
-            SettingsTile(
-              icon: Ionicons.notifications_outline,
-              title: "Notifications",
-              onTap: () {
-                Navigator.pushNamed(context, 'notifications');
-              },
-            ),
+            // SettingsTile(
+            //   icon: Ionicons.notifications_outline,
+            //   title: "Notifications",
+            //   onTap: () {
+            //     Navigator.pushNamed(context, 'notifications');
+            //   },
+            // ),
             SettingsTile(
               icon: Ionicons.pencil_sharp,
               title: "Display",

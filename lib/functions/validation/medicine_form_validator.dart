@@ -23,3 +23,15 @@ FormFieldValidator nameValidator = (value) {
   }
   return null;
 };
+
+FormFieldValidator hasDecimalNumber = (value) {
+  final decimalRegex =
+      RegExp(r'^\d+(\.\d+)?$'); // Matches integers and decimal numbers
+  if (value == null || value.trim().isEmpty) {
+    return 'Please enter a valid number';
+  }
+  if (!decimalRegex.hasMatch(value)) {
+    return 'Please enter a valid decimal number';
+  }
+  return null;
+};

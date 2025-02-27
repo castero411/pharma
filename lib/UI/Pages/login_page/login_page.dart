@@ -40,7 +40,7 @@ class LoginPage extends ConsumerWidget {
                 children: [
                   // Logo (you can replace this with an actual logo)
                   Text(
-                    'MedGuard',
+                    'Mediguard',
                     style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: 50,

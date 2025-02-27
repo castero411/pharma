@@ -1,0 +1,2 @@
+D:/Non_Uni projects/apps/pharma/android/app/.cxx/RelWithDebInfo/f1225q3p/x86_64/CMakeFiles/edit_cache.dir
+D:/Non_Uni projects/apps/pharma/android/app/.cxx/RelWithDebInfo/f1225q3p/x86_64/CMakeFiles/rebuild_cache.dir

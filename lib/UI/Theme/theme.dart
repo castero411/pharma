@@ -11,7 +11,7 @@ final appThemes = {
   AppTheme.light3: lightTheme3
 };
 
-var lightTheme1 = ThemeData.light().copyWith(
+var lightTheme3 = ThemeData.light().copyWith(
   scaffoldBackgroundColor: xScaffoldColorLight,
   indicatorColor: xLightTextColor,
   appBarTheme: AppBarTheme(
@@ -36,6 +36,7 @@ var lightTheme1 = ThemeData.light().copyWith(
 var darkTheme1 = ThemeData.dark().copyWith(
   colorScheme: ColorScheme.dark().copyWith(
     primary: xMainColor,
+    secondary: xSecondaryColor,
   ),
   hoverColor: xContainerColor,
   floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -60,7 +61,7 @@ var lightTheme2 = ThemeData.light().copyWith(
       brightness: Brightness.light,
       onPrimary: Color.fromRGBO(254, 253, 248, 1),
       // secondary: Color.fromRGBO(238, 222, 237, 1),
-      secondary: Colors.black,
+      secondary: Color.fromRGBO(145, 150, 190, 1),
       onSecondary: Color.fromRGBO(254, 253, 248, 1),
       error: Color.fromRGBO(186, 26, 26, 1),
       onError: Colors.white,
@@ -73,6 +74,7 @@ var lightTheme2 = ThemeData.light().copyWith(
 var darkTheme2 = ThemeData.dark().copyWith(
   colorScheme: ColorScheme.dark().copyWith(
     primary: xMainColor,
+    secondary: Color.fromRGBO(145, 150, 190, 1),
   ),
   hoverColor: Color.fromRGBO(238, 222, 237, 1),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -82,7 +84,7 @@ var darkTheme2 = ThemeData.dark().copyWith(
   scaffoldBackgroundColor: xScaffoldColorDark,
 );
 
-var lightTheme3 = ThemeData.light().copyWith(
+var lightTheme1 = ThemeData.light().copyWith(
     appBarTheme: AppBarTheme(
       backgroundColor: Color.fromRGBO(255, 253, 241, 1),
       titleTextStyle: bigTextStyle,

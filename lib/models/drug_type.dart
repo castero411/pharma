@@ -3,5 +3,7 @@ final List<String> drugType = [
   'injection',
   'elixir',
   'syrup',
-  'nepolyzer'
+  'nebulizer',
+  'oral drops',
+  'eye drops'
 ];

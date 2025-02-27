@@ -5,6 +5,8 @@ import 'package:medicine_manager/UI/vague_widgets/decorated_box.dart';
 import '../../../Provider/provider.dart';
 
 class TimePicker extends ConsumerWidget {
+  const TimePicker({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedTime = ref.watch(timeProvider);

@@ -31,6 +31,8 @@ class TimePicker extends ConsumerWidget {
                   child: child!,
                 );
               },
+              initialEntryMode: TimePickerEntryMode.dial,
+              useRootNavigator: false,
             );
 
             if (newTime != null) {

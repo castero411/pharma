@@ -28,6 +28,30 @@ final alarmSettings = AlarmSettings(
 
 Future<void> createAlarm(String medicineName, String date, String time,
     String description, DateTime medicineTime) async {
+  List<AlarmSettings> alarms = await Alarm.getAlarms();
+  DateTime timeLimit = medicineTime.add(Duration(minutes: 5));
+
+  for (var alarm in alarms) {
+    if (medicineTime.isAfter(alarm.dateTime) &&
+        medicineTime.isBefore(timeLimit) &&
+        alarm.id != generateId(medicineName, date, time)) {
+      await Alarm.set(
+          alarmSettings: alarmSettings.copyWith(
+        dateTime: medicineTime,
+        id: generateId(medicineName, date, time),
+        notificationSettings: NotificationSettings(
+          title: '${alarm.notificationSettings.title} and $medicineName',
+          body: '${alarm.notificationSettings.body} \n $description',
+          stopButton: 'Stop the alarm',
+          icon: 'notification_icon',
+        ),
+      ));
+
+      Alarm.stop(alarm.id);
+      return;
+    }
+  }
+
   if (medicineTime.isAfter(DateTime.now())) {
     await Alarm.set(
         alarmSettings: alarmSettings.copyWith(
@@ -41,6 +65,8 @@ Future<void> createAlarm(String medicineName, String date, String time,
       ),
     ));
   }
+
+  //print(Alarm.scheduled);
 }
 
 Future<void> reEnableAlarm(

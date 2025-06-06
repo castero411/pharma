@@ -1,16 +1,38 @@
-# medicine_manager
+# Medicine Manager App
 
-A new Flutter project.
+The **Medicine Manager App** is a Flutter mobile application designed to help users organize and track their medication schedules easily. It allows users to add medicines with specific dosage information and select the days of the week when the medicine should be taken. The app sends timely reminders to improve medication adherence and supports storing data securely in Firebase Firestore.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Add and manage medicines with dosage, timing, and day selection  
+- Schedule reminders/notifications to alert users when it’s time to take their medicine  
+- Store medicine information in Firebase Firestore for secure, cloud-based persistence  
+- User-friendly and intuitive interface designed with Flutter for smooth performance on Android and iOS  
+- Local persistence ensures data remains accessible offline  
+- Simple navigation and clean UI focused on enhancing user experience  
 
-A few resources to get you started if this is your first Flutter project:
+## Installation
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. **Prerequisites:**  
+    - Flutter SDK installed ([flutter.dev](https://flutter.dev/docs/get-started/install))  
+    - Firebase project setup with Firestore and Authentication enabled  
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+2. **Clone the repository:**  
+    ```bash
+    git clone https://github.com/yourusername/medicine-manager-app.git
+    cd medicine-manager-app
+    ```
+
+3. **Install dependencies:**  
+    ```bash
+    flutter pub get
+    ```
+
+4. **Configure Firebase:**  
+    - Add your `google-services.json` (Android) and `GoogleService-Info.plist` (iOS) files to the respective platform directories  
+    - Follow Firebase setup guides for Flutter [here](https://firebase.flutter.dev/docs/overview)  
+
+5. **Run the app:**  
+    ```bash
+    flutter run
+    ```

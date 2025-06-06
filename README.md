@@ -36,3 +36,17 @@ The **Medicine Manager App** is a Flutter mobile application designed to help us
     ```bash
     flutter run
     ```
+## Usage
+
+- Open the app and create an account or sign in using Firebase Authentication
+- Add a new medicine by entering its name, dosage details, and select the days you need to take it
+- Set up reminders that will notify you at the scheduled times
+- View, edit, or delete medicines from your list as needed
+- The app syncs your data with Firestore, so your medicines are backed up and accessible across devices
+
+## Technologies Used
+- Flutter
+- Firebase Firestore
+- Firebase Authentication
+- Local notifications (alarm/reminder package)
+- Riverpod 

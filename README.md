@@ -27,12 +27,7 @@ The **Medicine Manager App** is a Flutter mobile application designed to help us
     ```bash
     flutter pub get
     ```
-
-4. **Configure Firebase:**  
-    - Add your `google-services.json` (Android) and `GoogleService-Info.plist` (iOS) files to the respective platform directories  
-    - Follow Firebase setup guides for Flutter [here](https://firebase.flutter.dev/docs/overview)  
-
-5. **Run the app:**  
+4. **Run the app:**  
     ```bash
     flutter run
     ```
